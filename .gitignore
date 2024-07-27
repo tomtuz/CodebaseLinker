@@ -1,0 +1,5 @@
+node_modules
+dist
+
+# output file format, i.e. default: cr_codebase
+cotext_*
