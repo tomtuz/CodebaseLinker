@@ -73,6 +73,4 @@ export const DEFAULT_IGNORES = [
   ".cache",
   "dist",
   "tmp",
-  // Our output file
-  "codebase.md",
 ];
