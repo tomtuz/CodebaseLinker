@@ -1,4 +1,4 @@
-import type { CodebaseStruct } from "./codebaseStruct";
+import type { CodebaseStruct } from "./types/codebaseStruct";
 
 // Used for testing context on the package itself
 const codebaseStruct: CodebaseStruct = {

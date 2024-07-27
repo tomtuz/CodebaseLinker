@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import { processCodebase } from './processCodebase';
-import { loadStructFile } from './utils/configLoader';
+import { loadStructFile } from './config/configLoader';
 import { logger, LogLevel } from './utils/logger';
 import { initializeProject } from './init/projectInitializer';
 import packageJson from '../package.json';

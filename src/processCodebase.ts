@@ -1,18 +1,14 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { CodebaseStruct } from './codebaseStruct';
+import { CodebaseStruct } from './types/codebaseStruct';
 import { logger, LogLevel } from './utils/logger';
-import { getFilePaths, formatFile } from './utils';
+import { getFilePaths } from './file_processing/fileAggregator';
+import { formatFile } from './file_processing/fileFormatter';
 
 export async function processCodebase(
   options: any,
   inputCodebaseStruct?: CodebaseStruct
 ): Promise<void> {
-  logger.debug('\n(F) processCodebase');
-  logger.debug('--------------');
-  logger.debug(`(P) options: ${JSON.stringify(options, null, 2)}`);
-  logger.debug(`(P) inputCodebaseStruct: ${JSON.stringify(inputCodebaseStruct, null, 2)}`);
-
   const basePath = options.input || process.cwd();
   const globalOutput = options.output || 'cotext_output.md';
   const format = options.format || 'md';
@@ -89,13 +85,15 @@ export async function processCodebase(
 
   if (warnings.length > 0) {
     logger.warn('Processing completed with warnings:');
-    // biome-ignore lint/complexity/noForEach: <explanation>
-    warnings.forEach(warning => logger.warn(`- ${warning}`));
+    for (const warning of warnings) {
+      logger.warn(`- ${warning}`);
+    }
   } else {
     logger.info('Processing completed successfully.');
   }
 
   logger.info(`Total output files generated: ${processedFiles.size}`);
-  // biome-ignore lint/complexity/noForEach: <explanation>
-  processedFiles.forEach(file => logger.info(`- ${file}`));
+  for (const file of processedFiles) {
+    logger.info(`- ${file}`);
+  }
 }

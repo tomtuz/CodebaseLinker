@@ -10,6 +10,8 @@
     "cotext": "./bin/index.js"
   },
   "scripts": {
+    "dev": "tsx src/index.ts -v -d -c .cotext/cotext.config.ts",
+    "dev:silent": "tsx src/index.ts -c .cotext/cotext.config.ts",
     "build": "tsup src/index.ts --format esm,cjs --dts --clean --outDir dist --metafile --no-splitting",
     "start": "tsx src/index.ts",
     "dev:init": "tsx src/index.ts init",

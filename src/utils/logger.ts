@@ -25,27 +25,27 @@ class Logger {
     this.level = level;
   }
 
-  info(message: string) {
-    console.log(message);
+  info(message: string, ...args: any[]) {
+    console.log(message, ...args);
   }
 
-  warn(message: string) {
-    console.warn(message);
+  warn(message: string, ...args: any[]) {
+    console.warn(message, ...args);
   }
 
-  error(message: string) {
-    console.error(message);
+  error(message: string, ...args: any[]) {
+    console.error(message, ...args);
   }
 
-  verbose(message: string) {
+  verbose(message: string, ...args: any[]) {
     if (this.level >= LogLevel.Verbose) {
-      console.log(message);
+      console.log(message, ...args);
     }
   }
 
-  debug(message: string) {
+  debug(message: string, ...args: any[]) {
     if (this.level >= LogLevel.Debug) {
-      console.log(message);
+      console.log(message, ...args);
     }
   }
 }

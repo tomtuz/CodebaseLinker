@@ -1,9 +1,9 @@
 import fg from 'fast-glob';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { CodebaseStructPath, CodebaseStructOptions } from './codebaseStruct';
-import { logger } from './utils/logger';
-import { DEFAULT_IGNORES } from './ignore_files';
+import { CodebaseStructPath, CodebaseStructOptions } from '../types/codebaseStruct';
+import { logger } from '../utils/logger';
+import { DEFAULT_IGNORES } from '../utils/constants';
 
 const MAX_FILES_PER_DIRECTORY = 100;
 
@@ -46,7 +46,7 @@ export async function getFilePaths(
     const combinedGlobs = [
       ...(globPatterns.exclude || []),
       ...DEFAULT_IGNORES,
-    ]
+    ];
     logger.debug(`(R) combinedGlobs: ${JSON.stringify(combinedGlobs, null, 2)}`);
 
     const options = {
@@ -68,9 +68,9 @@ export async function getFilePaths(
 
     return allFiles;
   } catch (error: any) {
-    logger.error(`Error processing path ${fullPath}: ${error.message}`);
+    logger.error(`Error processing path ${fullPath}:`, error.message);
     if (logger.isDebugEnabled()) {
-      logger.debug(`Stack trace: ${error.stack}`);
+      logger.debug("Stack trace:", error.stack);
     }
   }
 
@@ -100,27 +100,4 @@ function buildGlobPatterns(pathConfig: CodebaseStructPath, globalOptions: Codeba
     include: includePatterns,
     exclude: excludePatterns,
   };
-}
-
-export async function formatFile(filePath: string, format: string): Promise<string> {
-  logger.debug('\n(F) formatFile');
-  logger.debug('--------------');
-  logger.debug(`(P) filePath: ${filePath}`);
-  logger.debug(`(P) format: ${format}`);
-
-  try {
-    const content = await fs.readFile(filePath, 'utf-8');
-    const relativePath = path.relative(process.cwd(), filePath);
-
-    // use minimum of 4 backticks to prevent formatting issues
-    return [
-      `# ${relativePath}`,
-      `\`\`\`\`${format}`,
-      `// ${relativePath}`,
-      content,
-      '````\n'
-    ].join('\n');
-  } catch (error: any) {
-    throw new Error(`Error reading file ${filePath}: ${error.message}`);
-  }
 }

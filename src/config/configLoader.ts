@@ -1,6 +1,6 @@
 import { cosmiconfig } from 'cosmiconfig';
-import { CodebaseStruct } from '../codebaseStruct';
-import { logger } from './logger';
+import { CodebaseStruct } from '../types/codebaseStruct';
+import { logger } from '../utils/logger';
 
 const defaultStruct: CodebaseStruct = {
   options: {
@@ -8,16 +8,10 @@ const defaultStruct: CodebaseStruct = {
     baseUrl: '.',
     format: 'ts',
   },
-  paths: [
-    { path: '.' }
-  ]
+  paths: [{ path: '.' }]
 };
 
 export async function loadStructFile(configPath: string | undefined): Promise<CodebaseStruct> {
-  logger.debug('\n(F) loadStructFile');
-  logger.debug('--------------');
-  logger.debug(`(P) loadStructFile: ${configPath}`);
-
   const explorer = cosmiconfig('cotext', {
     searchPlaces: ['cotext.config.ts', 'cotext.config.js'],
   });
@@ -47,8 +41,8 @@ export async function loadStructFile(configPath: string | undefined): Promise<Co
       paths: userStruct.paths || defaultStruct.paths
     };
   } catch (error: any) {
-    logger.error('Error loading configuration:');
-    throw new Error(error.message);
+    logger.error('Error loading configuration:', error.message);
+    throw error;
   }
 }
 
