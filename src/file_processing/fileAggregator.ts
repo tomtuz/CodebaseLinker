@@ -43,18 +43,18 @@ export async function getFilePaths(
     const globPatterns = buildGlobPatterns(pathConfig, globalOptions);
     logger.debug(`(R) globPatterns: ${JSON.stringify(globPatterns, null, 2)}`);
 
-    const combinedGlobs = [
+    const combinedIgnoreGlobs = [
       ...(globPatterns.exclude || []),
       ...DEFAULT_IGNORES,
     ];
-    logger.debug(`(R) combinedGlobs: ${JSON.stringify(combinedGlobs, null, 2)}`);
+    logger.debug(`(R) combinedIgnoreGlobs: ${JSON.stringify(combinedIgnoreGlobs, null, 2)}`);
 
     const options = {
-      cwd: fullPath,
-      dot: false,
+      cwd: basePath,
+      dot: true,
       absolute: true,
       onlyFiles: true,
-      ignore: combinedGlobs,
+      ignore: combinedIgnoreGlobs,
     };
 
     const allFiles = await fg(globPatterns.include, options);
@@ -85,16 +85,19 @@ function buildGlobPatterns(pathConfig: CodebaseStructPath, globalOptions: Codeba
 
   const includePatterns = [
     ...(globalOptions.include || []),
-    ...(pathConfig.include || [])
+    ...(pathConfig.include || []),
+    pathConfig.path
   ];
   const excludePatterns = [
     ...(globalOptions.exclude || []),
     ...(pathConfig.exclude || [])
   ];
 
-  if (includePatterns.length === 0) {
-    includePatterns.push('**/*'); // Include all files if no specific patterns are provided
-  }
+  // if (includePatterns.length === 0) {
+  //   includePatterns.push('**/*'); // Include all files if no specific patterns are provided
+  //   // includePatterns.push('**'); // Include all files if no specific patterns are provided
+  //   // includePatterns.push('*'); // Include all files if no specific patterns are provided
+  // }
 
   return {
     include: includePatterns,

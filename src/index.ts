@@ -1,10 +1,9 @@
 import { Command } from 'commander';
 import { processCodebase } from './processCodebase';
-import { loadStructFile } from './config/configLoader';
+// import { processCodebase as oldProcessCodebase } from './old_processCodebase';
 import { logger, LogLevel } from './utils/logger';
 import { initializeProject } from './init/projectInitializer';
 import packageJson from '../package.json';
-import path from 'node:path';
 
 const program = new Command();
 
@@ -35,21 +34,12 @@ program
   .option('-i, --input <directory>', 'Input directory')
   .option('-o, --output <file>', 'Output file name', 'cotext_output.md')
   .option('-f, --format <format>', 'Output format (md, json, yaml)', 'md')
-  .option('--no-default-ignores', 'Disable default ignore patterns')
   .option('-v, --verbose', 'Enable verbose output')
   .option('-d, --debug', 'Enable debug output')
   .action(async (options) => {
-    if (options.verbose) {
-      logger.setLevel(LogLevel.Verbose);
-    }
-    if (options.debug) {
-      logger.setLevel(LogLevel.Debug);
-    }
-
     try {
-      const configPath = options.config ? path.resolve(process.cwd(), options.config) : undefined;
-      const codebaseStruct = await loadStructFile(configPath);
-      await processCodebase(options, codebaseStruct);
+      // await oldProcessCodebase(options);
+      await processCodebase(options);
     } catch (error: any) {
       logger.error(`An error occurred: ${error.message}`);
       process.exit(1);

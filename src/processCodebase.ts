@@ -1,99 +1,67 @@
-import path from 'node:path';
-import fs from 'node:fs/promises';
 import { CodebaseStruct } from './types/codebaseStruct';
 import { logger, LogLevel } from './utils/logger';
-import { getFilePaths } from './file_processing/fileAggregator';
-import { formatFile } from './file_processing/fileFormatter';
+import { loadConfiguration } from './config/configurationLoader';
+import { loadConfiguration as loadConfigurationVite } from './config/configurationLoaderVite';
 
-export async function processCodebase(
-  options: any,
-  inputCodebaseStruct?: CodebaseStruct
-): Promise<void> {
-  const basePath = options.input || process.cwd();
-  const globalOutput = options.output || 'cotext_output.md';
-  const format = options.format || 'md';
-  const warnings: string[] = [];
-  const processedFiles: Set<string> = new Set();
+import { ProgramOptions } from './types/programOptions';
 
-  if (options.verbose) {
-    logger.setLevel(LogLevel.Verbose);
-  }
-  if (options.debug) {
-    logger.setLevel(LogLevel.Debug);
-  }
+export async function processCodebase(options: ProgramOptions): Promise<void> {
+  logger.debug('Starting codebase processing');
+  logger.debug(`Options: ${JSON.stringify(options, null, 2)}`);
 
-  let codebaseStruct = inputCodebaseStruct
-  if (!codebaseStruct) {
-    logger.warn('No codebase structure provided. Using default configuration.');
-    codebaseStruct = {
-      options: { name: 'Default Codebase', baseUrl: '.', format: 'ts' },
-      paths: [{ path: '.' }]
-    };
-  }
-
-  const { options: structOptions, paths } = codebaseStruct;
-  const baseUrl = structOptions?.baseUrl ? path.resolve(basePath, structOptions.baseUrl) : basePath;
-
-  for (const pathConfig of paths) {
-    try {
-      logger.info(`Processing path: ${pathConfig.path}`);
-      const filePaths = await getFilePaths(baseUrl, pathConfig, structOptions);
-
-      if (filePaths.length === 0) {
-        logger.warn(`No files found for path: ${pathConfig.path}`);
-        continue;
-      }
-
-      logger.info(`Found ${filePaths.length} files to process.`);
-
-      const formattedContent = await Promise.all(
-        filePaths.map(async (filePath) => {
-          try {
-            return await formatFile(filePath, pathConfig.format || structOptions?.format || 'txt');
-          } catch (error: any) {
-            logger.error(`Error formatting file ${filePath}: ${error.message}`);
-            return '';
-          }
-        })
-      );
-
-      const validContent = formattedContent.filter(content => content !== '');
-
-      if (validContent.length === 0) {
-        logger.warn(`No valid content generated for path: ${pathConfig.path}`);
-        continue;
-      }
-
-      const outputContent = `${validContent.join('\n\n')}\n`;
-
-      const outputPath = pathConfig.explicit
-        ? path.resolve(baseUrl, pathConfig.output || `${pathConfig.path}.${format}`)
-        : path.resolve(baseUrl, globalOutput);
-
-      const writeMethod = processedFiles.has(outputPath) ? fs.appendFile : fs.writeFile;
-      await writeMethod(outputPath, outputContent);
-      processedFiles.add(outputPath);
-
-      logger.info(`Processed ${validContent.length} files for path: ${pathConfig.path}`);
-      logger.info(`Output written to: ${outputPath}`);
-
-    } catch (error: any) {
-      logger.error(`Error processing path ${pathConfig.path}: ${error.message}`);
-      warnings.push(`Failed to process path: ${pathConfig.path}`);
+  try {
+    // 0. Set log level based on options
+    if (options.debug) {
+      logger.setLevel(LogLevel.Debug);
+    } else if (options.verbose) {
+      logger.setLevel(LogLevel.Verbose);
     }
-  }
 
-  if (warnings.length > 0) {
-    logger.warn('Processing completed with warnings:');
-    for (const warning of warnings) {
-      logger.warn(`- ${warning}`);
+
+    // 1. Configuration Loading
+    // const codebaseStruct = await loadConfiguration(options.config);
+    const codebaseStruct = await loadConfigurationVite(options.config);
+
+    if (!codebaseStruct || !codebaseStruct.options) {
+      throw new Error('Invalid or empty configuration loaded');
     }
-  } else {
+
+    // 2. Global Pattern Resolution
+    const globalPatterns = resolveGlobalPatterns(codebaseStruct.options);
+
+    // 3. Path-specific File Aggregation & 4. File Processing
+    const processedContent = await processAllPaths(codebaseStruct, globalPatterns, options);
+
+    // 5. Output Generation
+    await generateOutput(processedContent, codebaseStruct, options);
+
+    // 6. Error Handling and Logging
+    logSummary(processedContent);
+
+    // 7. Cleanup
+    // (Any necessary cleanup operations)
+
     logger.info('Processing completed successfully.');
+  } catch (error: any) {
+    logger.error(`An error occurred during codebase processing: ${error.message}`);
+    logger.debug(`Stack trace: ${error.stack}`);
+    throw error;
   }
+}
 
-  logger.info(`Total output files generated: ${processedFiles.size}`);
-  for (const file of processedFiles) {
-    logger.info(`- ${file}`);
-  }
+// Helper functions (to be implemented)
+function resolveGlobalPatterns(options: CodebaseStruct['options']) {
+  // Implementation
+}
+
+async function processAllPaths(codebaseStruct: CodebaseStruct, globalPatterns: any, options: any) {
+  // Implementation
+}
+
+async function generateOutput(processedContent: any, codebaseStruct: CodebaseStruct, options: any) {
+  // Implementation
+}
+
+function logSummary(processedContent: any) {
+  // Implementation
 }
