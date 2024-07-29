@@ -2,9 +2,10 @@ import { CodebaseStruct } from '@/types/codebaseStruct';
 
 export const DEFAULT_CONFIG: CodebaseStruct = {
   options: {
-    name: 'Default Codebase',
+    name: 'Codebase',
+    format: "tsx",
+    selectionMode: 'include',
     baseUrl: '.',
-    format: 'ts',
-  },
-  paths: [{ path: '.' }],
+    patterns: ['*']
+  }
 };

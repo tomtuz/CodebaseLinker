@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { loadConfiguration } from '@/config/configurationLoaderVite'
+import { loadConfiguration } from '@/config/configLoader'
 import { logger } from '@/utils/logger'
 import {
   ConfigPathNotProvidedError,

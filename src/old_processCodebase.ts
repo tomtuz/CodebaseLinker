@@ -4,7 +4,7 @@ import { CodebaseStruct } from './types/codebaseStruct';
 import { logger, LogLevel } from './utils/logger';
 import { getFilePaths } from './file_processing/fileAggregator';
 import { formatFile } from './file_processing/fileFormatter';
-import { loadConfiguration as loadConfigurationVite } from './config/configurationLoaderVite';
+import { loadConfiguration as loadConfigurationVite } from './config/configLoader';
 import { ProgramOptions } from './types/programOptions';
 
 export async function processCodebase(options: ProgramOptions): Promise<void> {

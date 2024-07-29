@@ -25,3 +25,10 @@ export class InvalidConfigurationError extends Error {
     this.name = 'InvalidConfigurationError';
   }
 }
+
+export class ConfigUndefinedError extends Error {
+  constructor(path: string) {
+    super(`E3a: Configuration is undefined or empty at path: ${path}. Ensure the file exports a valid configuration object.`);
+    this.name = 'ConfigUndefinedError';
+  }
+}

@@ -4,8 +4,8 @@ export default defineConfig({
   options: {
     name: 'Codebase',
     format: "tsx",
-  },
-  paths: [
-    { path: './' }
-  ]
+    selectionMode: 'include',
+    baseUrl: '.',
+    patterns: ['./']
+  }
 });

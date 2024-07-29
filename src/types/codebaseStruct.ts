@@ -4,37 +4,35 @@
 export interface CodebaseStructOptions {
   /** Name of the codebase structure */
   name?: string;
+
   /** Base URL for resolving relative paths */
   baseUrl?: string;
+
   /** Base URL for output files */
   outUrl?: string;
+
   /** Global output file name */
   output?: string;
+
   /** Default format for code blocks */
   format?: string;
-  /** Glob patterns to include (takes top level presedence) */
-  include?: string[];
-  /** Glob patterns to exclude (takes top level presedence) */
-  exclude?: string[];
-}
 
+  /**
+   * Selection mode for file inclusion/exclusion
+   * - 'include': Only explicitly included files will be processed
+   * - 'exclude': All files except explicitly excluded ones will be processed
+   */
+  selectionMode: 'include' | 'exclude';
 
-/**
- * Configuration for a specific path in the codebase structure
- */
-export interface CodebaseStructPath {
-  /** File or directory path to process */
-  path: string;
-  /** Patterns to exclude from processing */
-  exclude?: string[];
-  /** Patterns to include in processing */
-  include?: string[];
-  /** Specific output file for this path */
-  output?: string;
-  /** Format for code blocks from this path */
-  format?: string;
-  /** If true, this path will only be processed for its specific output */
-  explicit?: boolean;
+  /**
+   * Array of glob patterns for file selection
+   * - In 'include' mode: Patterns specify which files to include
+   * - In 'exclude' mode: Patterns specify which files to exclude
+   * 
+   * Patterns are processed in order, allowing for overrides.
+   * Use negative patterns (starting with !) to negate a previous pattern.
+   */
+  patterns: string[];
 }
 
 /**
@@ -43,8 +41,6 @@ export interface CodebaseStructPath {
 export interface CodebaseStruct {
   /** Global options for the codebase structure */
   options: CodebaseStructOptions;
-  /** Array of paths to process */
-  paths: CodebaseStructPath[];
 }
 
 /**

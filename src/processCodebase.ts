@@ -1,9 +1,8 @@
-import { CodebaseStruct } from './types/codebaseStruct';
 import { logger, LogLevel } from './utils/logger';
-import { loadConfiguration } from './config/configurationLoader';
-import { loadConfiguration as loadConfigurationVite } from './config/configurationLoaderVite';
+import { loadConfiguration as loadConfigurationVite } from './config/configLoader';
 
 import { ProgramOptions } from './types/programOptions';
+import { resolveGlobalPatterns } from './file_processing/globalPatternResolver';
 
 export async function processCodebase(options: ProgramOptions): Promise<void> {
   logger.debug('Starting codebase processing');
@@ -19,7 +18,6 @@ export async function processCodebase(options: ProgramOptions): Promise<void> {
 
 
     // 1. Configuration Loading
-    // const codebaseStruct = await loadConfiguration(options.config);
     const codebaseStruct = await loadConfigurationVite(options.config);
 
     if (!codebaseStruct || !codebaseStruct.options) {
@@ -27,19 +25,13 @@ export async function processCodebase(options: ProgramOptions): Promise<void> {
     }
 
     // 2. Global Pattern Resolution
-    const globalPatterns = resolveGlobalPatterns(codebaseStruct.options);
+    const selectedFiles = await resolveGlobalPatterns(codebaseStruct.options);
 
-    // 3. Path-specific File Aggregation & 4. File Processing
-    const processedContent = await processAllPaths(codebaseStruct, globalPatterns, options);
+    // 3. File Processing (placeholder)
+    // TODO: Implement file processing logic
 
-    // 5. Output Generation
-    await generateOutput(processedContent, codebaseStruct, options);
-
-    // 6. Error Handling and Logging
-    logSummary(processedContent);
-
-    // 7. Cleanup
-    // (Any necessary cleanup operations)
+    // 4. Output Generation (placeholder)
+    // TODO: Implement output generation logic
 
     logger.info('Processing completed successfully.');
   } catch (error: any) {
@@ -47,21 +39,4 @@ export async function processCodebase(options: ProgramOptions): Promise<void> {
     logger.debug(`Stack trace: ${error.stack}`);
     throw error;
   }
-}
-
-// Helper functions (to be implemented)
-function resolveGlobalPatterns(options: CodebaseStruct['options']) {
-  // Implementation
-}
-
-async function processAllPaths(codebaseStruct: CodebaseStruct, globalPatterns: any, options: any) {
-  // Implementation
-}
-
-async function generateOutput(processedContent: any, codebaseStruct: CodebaseStruct, options: any) {
-  // Implementation
-}
-
-function logSummary(processedContent: any) {
-  // Implementation
 }
