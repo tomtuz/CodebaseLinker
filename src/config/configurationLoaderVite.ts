@@ -7,83 +7,72 @@ import {
   ConfigFileAccessError,
   ConfigParseError,
   InvalidConfigurationError,
-  ConfigResolutionError
 } from '@/errors/ConfigurationErrors';
 import { isFileReadable } from './loaderUtils';
 import { validateConfig } from './validate';
-
-const DEFAULT_CONFIG: CodebaseStruct = {
-  options: {
-    name: 'Default Codebase',
-    baseUrl: '.',
-    format: 'ts',
-  },
-  paths: [{ path: '.' }],
-};
+import { DEFAULT_CONFIG } from '@/defaults/defaultConfig';
+import { deepMerge, DeepPartial } from '@/utils/objectUtils';
 
 export async function loadConfiguration(
   configPath?: string,
   configRoot: string = process.cwd()
 ): Promise<CodebaseStruct> {
-  logger.debug('# Configuration loading:');
-  logger.info('---------------');
+  logger.debug('# 1. Configuration Loading:');
+  logger.debug('---------------------------');
 
-  // 1.b) Validate the provided path
+  // 1.1 Config Path Validation
+  logger.debug('1.1 Config Path Validation');
+  // a) Check if the config path is provided
   if (!configPath) {
-    // E1b: Invalid config path
     throw new ConfigPathNotProvidedError();
   }
-
-  // 2.a) Resolve the path relative to the current working directory
+  // b) Validate the provided path
   const resolvedPath = path.resolve(configRoot, configPath);
-  if (!resolvedPath) {
-    throw new ConfigResolutionError();
-  }
   logger.debug('Resolved config path:', resolvedPath);
 
+  // 1.2 Config File Access
+  logger.debug('1.2 Config File Access');
+  // a) Resolve the path relative to the current working directory
+  // b) Attempt to access the file at the given path
   try {
     await isFileReadable(resolvedPath);
   } catch (error) {
-    // E2b: File doesn't exist or can't be accessed
     throw new ConfigFileAccessError(resolvedPath, error as Error);
   }
 
-  // 3.a) Load the configuration file
-  let rawConfig: Record<string, any> | any
+  // 1.3 Config Parsing
+  logger.debug('1.3 Config Parsing');
+  // a) Load the configuration file
+  // b) Parse the configuration content
+  let rawConfig: unknown;
   try {
     const fileUrl = pathToFileURL(resolvedPath).href;
     rawConfig = await import(fileUrl);
   } catch (error) {
-    // E3a: File read error
     throw new ConfigParseError(error as Error);
   }
 
-  // 3.b) Parse the configuration content
-  const config = typeof rawConfig.default === 'function' ? rawConfig.default() : rawConfig.default;
+  const config = typeof (rawConfig as { default?: unknown }).default === 'function'
+    ? (rawConfig as { default: () => unknown }).default()
+    : (rawConfig as { default?: unknown }).default;
 
-  // 4. Config Merging
-  const mergedConfig = mergeConfig(DEFAULT_CONFIG, config);
+  // 1.4 Config Merging
+  logger.debug('1.4 Config Merging');
+  // a) Merge the loaded configuration with the default configuration
+  const mergedConfig = deepMerge<CodebaseStruct>(DEFAULT_CONFIG, config as DeepPartial<CodebaseStruct>);
 
-  // 5. Config Validation
+  // 1.5 Config Validation
+  logger.debug('1.5 Config Validation');
+  // a) Check if the merged configuration adheres to the expected CodebaseStruct interface
+  // b) Validate specific fields and their types
   if (!await validateConfig(mergedConfig)) {
-    // E4: Invalid configuration structure
-    throw new InvalidConfigurationError();
+    throw new InvalidConfigurationError('Invalid configuration structure');
   }
 
-  // 6. Logging
+  // 1.6 Logging
+  logger.debug('1.6 Logging');
+  // a) Log the final configuration (at debug level)
   logger.debug('Final configuration:', JSON.stringify(mergedConfig, null, 2));
 
   return mergedConfig;
-}
-
-function mergeConfig(defaults: CodebaseStruct, overrides: Partial<CodebaseStruct>): CodebaseStruct {
-  return {
-    ...defaults,
-    ...overrides,
-    options: {
-      ...defaults.options,
-      ...overrides.options,
-    },
-    paths: overrides.paths ?? defaults.paths,
-  };
 }
