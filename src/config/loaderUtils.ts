@@ -17,8 +17,7 @@ export function isFileReadable(filename: string): boolean {
 
     return true
   } catch (error) {
-    // throw new ConfigFileAccessError(filename, error as Error);
-    return false
+    throw new ConfigFileAccessError(filename, error as Error);
   }
 }
 

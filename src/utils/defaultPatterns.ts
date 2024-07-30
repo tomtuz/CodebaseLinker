@@ -1,12 +1,4 @@
 export const DEFAULT_EXCLUSIONS = [
-  '**/node_modules/**',
-  '**/.git/**',
-  '**/dist/**',
-  '**/build/**',
-  '**/.DS_Store'
-]
-
-export const DEFAULT_IGNORES = [
   // Node.js
   "node_modules",
   "package-lock.json",

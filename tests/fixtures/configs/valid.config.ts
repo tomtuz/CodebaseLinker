@@ -1,15 +1,16 @@
-import { defineConfig } from './codebaseStruct';
+import { defineConfig } from '@/defaults/codebaseStruct';
 
 export default defineConfig({
   options: {
     name: 'Codebase',
     format: "tsx",
     baseUrl: '.',
-    exclude: ["example"]
+    selectionMode: 'exclude',
+    patterns: [
+      './src',
+      './tsconfig.json',
+      './package.json',
+      "example"
+    ]
   },
-  paths: [
-    { path: './src', },
-    { path: './tsconfig.json', },
-    { path: './package.json', },
-  ]
 });

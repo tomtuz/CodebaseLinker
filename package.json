@@ -13,6 +13,8 @@
     "dev": "tsx src/index.ts -v -d -c .cotext/cotext.config.ts",
     "dev:old": "tsx src/index.ts -v -d -c .cotext/cotext.config.ts",
     "dev:silent": "tsx src/index.ts -c .cotext/cotext.config.ts",
+    "bin": "tsx run_binary.ts",
+    "build_bin": "go build -o bin/mybinary.exe main.go",
     "build": "tsup src/index.ts --format esm,cjs --dts --clean --outDir dist --metafile --no-splitting",
     "start": "tsx src/index.ts",
     "dev:init": "tsx src/index.ts init",
@@ -43,6 +45,7 @@
     "esbuild": "^0.23.0",
     "fast-glob": "^3.3.2",
     "glob": "^11.0.0",
+    "minimatch": "^10.0.1",
     "ora": "^6.0.0",
     "zod": "^3.23.8"
   },
