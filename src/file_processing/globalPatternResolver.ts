@@ -16,9 +16,38 @@ function logPatternMatch(file: string, pattern: string, matched: boolean) {
 export async function resolveGlobalPatterns(options: CodebaseStructOptions, enablePatternMatch: boolean): Promise<string[]> {
   logger.debug('Starting global pattern resolution');
 
-  // ... (keep existing validation logic)
+  // 2.1 Determine Selection Mode
+  logger.debug('2.1 Determine Selection Mode');
+  const { selectionMode, patterns, baseUrl } = options;
 
-  const cwd = options.baseUrl ? path.resolve(process.cwd(), options.baseUrl) : process.cwd();
+  if (!selectionMode) {
+    throw new SelectionModeError('E2.1a: Selection mode is not provided in the configuration');
+  }
+
+  if (selectionMode !== 'include' && selectionMode !== 'exclude') {
+    throw new SelectionModeError('E2.1b: Invalid selection mode specified. Must be either "include" or "exclude"');
+  }
+
+  logger.debug(`Selection mode: ${selectionMode}`);
+
+  // 2.2 Process Patterns
+  logger.debug('2.2 Process Patterns');
+  if (!patterns || patterns.length === 0) {
+    throw new PatternError('E2.2: Patterns array is missing or empty');
+  }
+
+  const processedPatterns = patterns.map(pattern => {
+    if (pattern.includes('*') || path.extname(pattern)) {
+      return pattern;
+    }
+    return `${pattern}{,/**/*}`;
+  });
+
+  logger.debug(`Processed patterns: ${processedPatterns.join(', ')}`);
+
+  // 2.3 Resolve File Paths
+  logger.debug('2.3 Resolve File Paths');
+  const cwd = baseUrl ? path.resolve(process.cwd(), baseUrl) : process.cwd();
   logger.debug(`Working directory for glob: ${cwd}`);
 
   const globOptions = {
@@ -26,43 +55,47 @@ export async function resolveGlobalPatterns(options: CodebaseStructOptions, enab
     dot: true,
     onlyFiles: true,
     absolute: true,
-    ignore: options.selectionMode === 'include' ? [] : DEFAULT_EXCLUSIONS
+    ignore: selectionMode === 'include' ? [] : [...DEFAULT_EXCLUSIONS, ...processedPatterns]
   };
 
+  logger.debug(`Glob options: ${JSON.stringify(globOptions, null, 2)}`);
+
   try {
-    const allFiles = await fastGlob('**/*', globOptions);
-    const selectedFiles = allFiles.filter(file => {
-      const relativePath = path.relative(cwd, file);
-      const userDefinedPatterns = options.patterns.filter(pattern => pattern.startsWith('!'));
-      const matched = options.selectionMode === 'include'
-        ? options.patterns.some(pattern => minimatch(relativePath, pattern, { dot: true }))
-        : !userDefinedPatterns.some(pattern => minimatch(relativePath, pattern.slice(1), { dot: true }));
+    let selectedFiles: string[];
 
-      if (enablePatternMatch) {
-        logPatternMatch(relativePath, options.patterns.join(', '), matched);
-      }
-
-      return matched;
-    });
-
-    if (selectedFiles.length === 0) {
-      throw new FileResolutionError('No files matched the resolved patterns');
-    }
-
-    if (options.selectionMode === 'exclude') {
-      const userDefinedPatterns = options.patterns.filter(pattern => pattern.startsWith('!'));
-      // biome-ignore lint/complexity/noForEach: <explanation>
-      userDefinedPatterns.forEach(pattern => {
-        const matchingFiles = selectedFiles.filter(file => {
-          const relativePath = path.relative(cwd, file);
-          return minimatch(relativePath, pattern.slice(1), { dot: true });
-        });
-
-        if (matchingFiles.length === 0) {
-          logger.warn(`All files were excluded for pattern: ${pattern}`);
-        }
+    if (selectionMode === 'include') {
+      selectedFiles = await fastGlob(processedPatterns, globOptions);
+    } else {
+      const allFiles = await fastGlob('**/*', globOptions);
+      selectedFiles = allFiles.filter(file => {
+        const relativePath = path.relative(cwd, file);
+        const shouldExclude = processedPatterns.some(pattern =>
+          minimatch(relativePath, pattern, { dot: true }));
+        return !shouldExclude;
       });
     }
+
+    if (enablePatternMatch) {
+      // biome-ignore lint/complexity/noForEach: <explanation>
+      selectedFiles.forEach(file => {
+        const relativePath = path.relative(cwd, file);
+        // biome-ignore lint/complexity/noForEach: <explanation>
+        processedPatterns.forEach(pattern => {
+          const matched = minimatch(relativePath, pattern, { dot: true });
+          logPatternMatch(relativePath, pattern, matched);
+        });
+      });
+    }
+
+    // 2.4 Validate Results
+    if (selectedFiles.length === 0) {
+      throw new FileResolutionError('E2.4: No files matched the resolved patterns');
+    }
+
+    // 2.5 Logging
+    logger.debug('2.5 Logging');
+    logger.debug(`Final selected files:\n${selectedFiles.join('\n')}`);
+    logger.info(`Total files selected: ${selectedFiles.length}`);
 
     return selectedFiles;
   } catch (error) {
