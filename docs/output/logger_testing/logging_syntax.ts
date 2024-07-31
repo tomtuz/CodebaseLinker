@@ -56,20 +56,12 @@ class Logger {
     this.level.Debug = levelObj.Debug
     this.level.Verbose = levelObj.Verbose
 
-    logger.verbose("\nlog_level: ", this.level)
+    this.verbose("\nlog_level: ", this.level)
   }
 
   getLevels(): OutputLevel {
     return this.level
   }
-
-  // setLevel(logLevel: LogLevel): void {
-  //   this.level.add(logLevel);
-  // }
-
-  // setLevels(...levelArr: LogLevel[]): void {
-  //   this.level = new Set(levelArr);
-  // }
 
   // native logs
 
@@ -88,18 +80,11 @@ class Logger {
   }
 
   infoObj(message?: any, ...optionalParams: any[]): void {
-    // if (this.level.Verbose) {
-    //   console.log(`${message}\n${JSON.stringify(optionalParams, null, 2)}`);
-    // }
     console.log(`${message}\n${JSON.stringify(optionalParams, null, 2)}`);
   }
 
   debug(message?: any, ...optionalParams: any[]): void {
-    // if (this.level.Verbose) {
-
-    // }
     if (this.level?.Debug || this.level?.Verbose) {
-      // console.warn(picocolors.red(message), ...optionalParams);
       console.warn(message, ...optionalParams);
     }
   }
@@ -108,17 +93,6 @@ class Logger {
     if (this.level?.Verbose) {
       console.log(message, ...optionalParams);
     }
-
-    // if (optionalParams && typeof optionalParams === "object") {
-    //   // console.log(`${message}\n${JSON.stringify(optionalParams, null, 2)}`);
-    //   console.log(JSON.stringify(optionalParams, null, 2));
-    // } else {
-    //   console.log(optionalParams);
-    // }
-
-    // if (this.level?.Verbose) {
-    //   console.log(message, ...optionalParams);
-    // }
   }
 
   // format logs

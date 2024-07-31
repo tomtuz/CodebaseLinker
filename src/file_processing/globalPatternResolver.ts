@@ -1,24 +1,22 @@
 import { DEFAULT_EXCLUSIONS } from '@/utils/defaultPatterns';
 import { CodebaseStructOptions } from '@/types/codebaseStruct';
-import { logger } from '@/utils/logger';
+import { logger, LogLevel } from '../../docs/output/logger_testing/logging_syntax';
 import fastGlob from 'fast-glob';
 import path from 'node:path';
 import { minimatch } from 'minimatch';
 import { SelectionModeError, PatternError, FileResolutionError } from '@/errors/GlobErrors';
 
 function logPatternMatch(file: string, pattern: string, matched: boolean) {
-  logger.debug(`File: ${file}`);
-  logger.debug(`  Pattern: ${pattern}`);
-  logger.debug(`  Matched: ${matched}`);
-  logger.debug('');
+  logger.verbose(`File: ${file}`);
+  logger.verbose(`  Pattern: ${pattern}`);
+  logger.verbose(`  Matched: ${matched}`);
+  logger.verbose('');
 }
 
 export async function resolveGlobalPatterns(options: CodebaseStructOptions, enablePatternMatch: boolean): Promise<string[]> {
-  logger.debug('Starting global pattern resolution');
-
   // 2. Global Pattern Resolution
   // 2.1 Determine Selection Mode
-  logger.debug('2.1 Determine Selection Mode');
+  logger.verbose('2.1 Determine Selection Mode');
   const { selectionMode, patterns, baseUrl } = options;
 
   // a) Retrieve the selectionMode from the configuration
@@ -32,17 +30,10 @@ export async function resolveGlobalPatterns(options: CodebaseStructOptions, enab
   }
 
   // c) Set up the initial file selection based on the mode
-  logger.debug(`Selection mode: ${selectionMode}`);
-
-  // 2.2 Process Default Exclusions
-  logger.debug('2.2 Process Default Exclusions');
-  // a) If in 'exclude' mode:
-  //    - Apply the list of default exclusions (e.g., node_modules, .git)
-  //    - Check for any overrides in the user's patterns and apply them
-  // Note: This is implicitly handled in the globOptions below
+  logger.verbose(`Selection mode: ${selectionMode}\n`);
 
   // 2.3 Process User-Defined Patterns
-  logger.debug('2.3 Process User-Defined Patterns');
+  logger.verbose('2.3 Process User-Defined Patterns');
   // a) Retrieve the patterns array from the configuration
   // b) Validate that the patterns array exists and is not empty
   if (!patterns || patterns.length === 0) {
@@ -62,14 +53,12 @@ export async function resolveGlobalPatterns(options: CodebaseStructOptions, enab
     return `${pattern}{,/**/*}`;
   });
 
-  logger.debug(`Processed patterns: ${processedPatterns.join(', ')}`);
+  logger.verbose(`Processed patterns:\n${JSON.stringify(processedPatterns, null, 2)}\n`);
 
   // 2.4 Resolve File Paths
-  logger.debug('2.4 Resolve File Paths');
+  logger.verbose('2.4 Resolve File Paths');
   // a) Use fast-glob to resolve the final list of file paths based on the processed patterns
   const cwd = baseUrl ? path.resolve(process.cwd(), baseUrl) : process.cwd();
-  logger.debug(`Working directory for glob: ${cwd}`);
-
   const globOptions = {
     cwd,
     dot: true,
@@ -78,7 +67,7 @@ export async function resolveGlobalPatterns(options: CodebaseStructOptions, enab
     ignore: selectionMode === 'include' ? [] : [...DEFAULT_EXCLUSIONS, ...processedPatterns]
   };
 
-  logger.debug(`Glob options: ${JSON.stringify(globOptions, null, 2)}`);
+  logger.verbose(`Glob options: ${JSON.stringify(globOptions, null, 2)}\n`);
 
   try {
     let selectedFiles: string[];
@@ -116,10 +105,10 @@ export async function resolveGlobalPatterns(options: CodebaseStructOptions, enab
     }
 
     // 2.5 Logging
-    logger.debug('2.5 Logging');
+    // logger.verbose('2.5 Logging');
     // a) Log the final list of selected files
-    logger.debug(`Final selected files:\n${selectedFiles.join('\n')}`);
-    logger.info(`Total files selected: ${selectedFiles.length}`);
+    // logger.verbose(`Final selected files:\n${selectedFiles.join('\n')}`);
+    // logger.info(`Files selected: ${selectedFiles.length}`);
 
     // b) Log any warnings for unexpected results:
     //    - For each original pattern, check if any files were matched

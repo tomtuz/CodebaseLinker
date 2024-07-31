@@ -1,22 +1,19 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { logger } from '@/utils/logger';
+import { logger, LogLevel } from '../../docs/output/logger_testing/logging_syntax';
 import { CodebaseStructOptions } from '@/types/codebaseStruct';
 
 export async function processFiles(filePaths: string[], options: CodebaseStructOptions): Promise<{ totalCharacters: number }> {
-  logger.debug('Starting file processing and aggregation');
-
   let totalCharacters = 0;
   const processedContents: string[] = [];
 
   for (const filePath of filePaths) {
     try {
-      logger.debug(`Processing file: ${filePath}`);
+      logger.verbose(filePath);
       const content = await fs.readFile(filePath, 'utf-8');
       const formattedContent = formatContent(filePath, content, options.format);
       processedContents.push(formattedContent);
       totalCharacters += formattedContent.length;
-      logger.debug(`Successfully processed: ${filePath}`);
     } catch (error) {
       logger.error(`Error processing ${filePath}: ${error}`);
     }
@@ -25,7 +22,7 @@ export async function processFiles(filePaths: string[], options: CodebaseStructO
   const outputPath = path.resolve(process.cwd(), options.output || 'codebase-context.md');
   try {
     await fs.writeFile(outputPath, processedContents.join('\n\n'));
-    logger.info(`Output written to: ${outputPath}`);
+    logger.info(`\nOutput written to: ${outputPath}`);
   } catch (error) {
     logger.error(`Failed to write output file: ${error}`);
   }
@@ -53,14 +50,6 @@ function createCodeBlock(relativePath: string, format: string, content: string) 
     content: content,
     codeEnd: `${wrap}`,
   };
-
-  // return [
-  //   `# ${relativePath}`,
-  //   `\`\`\`\`${format}`,
-  //   `// ${relativePath}`,
-  //   content,
-  //   '````\n'
-  // ].join('\n');
 
   return Object.values(codeBlock).join('\n');
 }
