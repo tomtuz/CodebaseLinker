@@ -22,17 +22,17 @@ export async function loadConfiguration(
   logger.debug('---------------------------');
 
   // 1.1 Config Path Validation
-  logger.debug('1.1 Config Path Validation');
+  logger.step('1.1 Config Path Validation');
   // a) Check if the config path is provided
   if (!configPath) {
     throw new ConfigPathNotProvidedError();
   }
   // b) Validate the provided path
   const resolvedPath = path.resolve(configRoot, configPath);
-  logger.debug('Resolved config path:', resolvedPath);
+  logger.info(`Resolved config path: ${resolvedPath}`);
 
   // 1.2 Config File Access
-  logger.debug('1.2 Config File Access');
+  logger.step('1.2 Config File Access');
   // a) Resolve the path relative to the current working directory
   // b) Attempt to access the file at the given path
   try {
@@ -42,14 +42,14 @@ export async function loadConfiguration(
   }
 
   // 1.3 Config Parsing
-  logger.debug('1.3 Config Parsing');
+  logger.step('1.3 Config Parsing');
   // a) Load the configuration file
   // b) Parse the configuration content
   let rawConfig: unknown;
   try {
     const fileUrl = pathToFileURL(resolvedPath).href;
     rawConfig = await import(fileUrl);
-    logger.debug('Raw imported configuration:');
+    logger.info('Raw imported configuration:');
     logger.debug(JSON.stringify(rawConfig, null, 2));
   } catch (error) {
     throw new ConfigParseError(error as Error);
@@ -92,7 +92,7 @@ export async function loadConfiguration(
   // 1.6 Logging
   logger.debug('1.6 Logging');
   // a) Log the final configuration (at debug level)
-  logger.debug('Final configuration:', JSON.stringify(mergedConfig, null, 2));
+  logger.debug(`Final configuration: ${JSON.stringify(mergedConfig, null, 2)}`);
 
   return mergedConfig;
 }

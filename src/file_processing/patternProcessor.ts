@@ -1,6 +1,6 @@
 import { minimatch } from 'minimatch';
 import path from 'node:path';
-import { logger } from '../utils/logger';
+import { logger } from '@/utils/logger';
 
 export function processPatterns(patterns: string[], selectionMode: 'include' | 'exclude'): string[] {
   return patterns.map(pattern => {

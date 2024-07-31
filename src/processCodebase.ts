@@ -9,15 +9,13 @@ export async function processCodebase(options: ProgramOptions): Promise<void> {
   const errors: Error[] = [];
 
   try {
-    logger.debug('options: ', options);
     // Set log level based on options
-    logger.setLevel(options.debug ? LogLevel.Debug : LogLevel.Normal);
-
+    logger.setLevel(options.debug ? LogLevel.Debug : LogLevel.Info);
     logger.debug('Starting codebase processing');
     logger.debug(`Options: ${JSON.stringify(options, null, 2)}`);
 
     // 1. Configuration Loading
-    logger.debug('\n1. Configuration Loading');
+    logger.header('\n1. Configuration Loading');
     const codebaseStruct = await loadConfiguration(options.config);
 
     if (!codebaseStruct || !codebaseStruct.options) {
@@ -25,15 +23,15 @@ export async function processCodebase(options: ProgramOptions): Promise<void> {
     }
 
     // 2. Global Pattern Resolution
-    logger.debug('\n2. Global Pattern Resolution');
+    logger.header('\n2. Global Pattern Resolution');
     const selectedFiles = await resolveGlobalPatterns(codebaseStruct.options, options.patternMatch);
 
     // 3. File Processing and Aggregation
-    logger.debug('\n3. File Processing and Aggregation');
+    logger.header('\n3. File Processing and Aggregation');
     const { totalCharacters } = await processFiles(selectedFiles, codebaseStruct.options);
 
     // Display results
-    logger.info('\nProcessing Results:');
+    logger.step('\nProcessing Results:');
     logger.info('-------------------');
     logger.info('Selected files:');
     const baseDir = process.cwd();

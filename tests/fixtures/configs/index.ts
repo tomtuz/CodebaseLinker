@@ -22,7 +22,7 @@ export {
 /**
  * Usage in tests:
  * 
- * import { valid_config, invalid_config, default_config } from '../fixtures/configs'
+ * import { valid_config, invalid_config, default_config } from '@/fixtures/configs'
  * 
  * Then use these imported configurations in your test cases as needed.
  */
