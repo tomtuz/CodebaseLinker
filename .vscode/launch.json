@@ -4,8 +4,14 @@
     {
       "type": "node-terminal",
       "request": "launch",
-      "name": "Debug Dev",
-      "command": "npm run debug",
+      "name": "Debug Build",
+      "command": "npm run build && npm run debug_build"
+    },
+    {
+      "type": "node-terminal",
+      "request": "launch",
+      "name": "Debug TSX",
+      "command": "npm run dev"
     }
   ]
 }

@@ -14,11 +14,15 @@ import { isFileReadable } from './loaderUtils';
 import { validateConfig } from './validate';
 import { DEFAULT_CONFIG } from '@/defaults/defaultConfig';
 import { deepMerge, DeepPartial } from '@/utils/objectUtils';
+import { tsImport } from 'tsx/esm/api';
 
 export async function loadConfiguration(
   configPath?: string,
   configRoot: string = process.cwd()
 ): Promise<CodebaseStruct> {
+  const log_settings = ({ Info: true, Debug: true, Verbose: true })
+  logger.setLevels(log_settings);
+
   // 1.1 Config Path Validation
   logger.verbose('1.1 Config Path Validation');
   // a) Check if the config path is provided
@@ -47,12 +51,19 @@ export async function loadConfiguration(
   let config: unknown;
   try {
     const fileUrl = pathToFileURL(resolvedPath).href;
-    const { default: configData } = await import(fileUrl);
-    config = configData;
+    // TSX import
+    const module = await tsImport(
+      fileUrl,
+      {
+        onImport: (url) => console.log('Imported:', url),
+        parentURL: import.meta.url,
+      }
+    );
+    config = module?.default;
 
     logger.verbose(
       'Raw imported configuration:\n',
-      JSON.stringify(configData, null, 2)
+      JSON.stringify(config, null, 2)
     );
     logger.verbose('[+] Config parse\n', "custom");
   } catch (error) {

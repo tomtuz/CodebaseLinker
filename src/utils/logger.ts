@@ -63,14 +63,6 @@ class Logger {
     return this.level
   }
 
-  // setLevel(logLevel: LogLevel): void {
-  //   this.level.add(logLevel);
-  // }
-
-  // setLevels(...levelArr: LogLevel[]): void {
-  //   this.level = new Set(levelArr);
-  // }
-
   // native logs
 
   error(message?: any, ...optionalParams: any[]): void {
@@ -105,20 +97,10 @@ class Logger {
   }
 
   verbose(message?: any, ...optionalParams: any[]): void {
+    console.log("this.level.Verbose? : ", this.level.Verbose)
     if (this.level?.Verbose) {
       console.log(message, ...optionalParams);
     }
-
-    // if (optionalParams && typeof optionalParams === "object") {
-    //   // console.log(`${message}\n${JSON.stringify(optionalParams, null, 2)}`);
-    //   console.log(JSON.stringify(optionalParams, null, 2));
-    // } else {
-    //   console.log(optionalParams);
-    // }
-
-    // if (this.level?.Verbose) {
-    //   console.log(message, ...optionalParams);
-    // }
   }
 
   // format logs

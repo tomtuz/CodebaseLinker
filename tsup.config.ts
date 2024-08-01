@@ -1,11 +1,13 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  format: ["esm", "cjs"],
-  clean: true,
-  minify: true,
+  format: ["esm"],
+  platform: 'node',
   dts: true,
-  entry: {
-    lib: "src/index.ts",
-  },
+  splitting: false,
+  clean: true,
+  // minify: true,
+  entry: ["src/index.ts"],
+  // avoid bundling entire libraries
+  external: ['tsx', 'esbuild'],
 });

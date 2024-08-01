@@ -2,20 +2,28 @@
   "name": "cotext",
   "version": "1.0.0",
   "description": "A CLI tool to aggregate codebase files for context generation",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
   "bin": {
-    "cotext": "./bin/index.js"
+    "cotext": "dist/index.js"
   },
   "scripts": {
-    "dev": "tsx src/index.ts -v -d -c .cotext/cotext.config.ts",
-    "dev:old": "tsx src/index.ts -v -d -c .cotext/cotext.config.ts",
-    "dev:silent": "tsx src/index.ts -c .cotext/cotext.config.ts",
+    "dev": "tsx src/index.ts -d -c .cotext/test.config.ts",
     "bin": "tsx run_binary.ts",
+    "build": "tsup src/index.ts",
+    "debug_build": "node dist/index.js -d -c .cotext/test.config.ts",
+    "debug_tsx": "tsx src/index.ts -d -c .cotext/test.config.ts",
     "build_bin": "go build -o bin/mybinary.exe main.go",
-    "build": "tsup src/index.ts --format esm,cjs --dts --clean --outDir dist --metafile --no-splitting",
     "start": "tsx src/index.ts",
     "dev:init": "tsx src/index.ts init",
     "postbuild": "node src/scripts/postbuild.mjs",
@@ -27,7 +35,7 @@
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "types": "./dist/index.d.ts"
     }
   },
   "keywords": [
@@ -41,8 +49,10 @@
   "dependencies": {
     "commander": "^11.0.0",
     "fast-glob": "^3.3.2",
+    "importx": "^0.4.3",
     "minimatch": "^10.0.1",
     "picocolors": "^1.0.1",
+    "tsx": "4.16.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -52,7 +62,6 @@
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "tsup": "^8.2.3",
-    "tsx": "^4.7.0",
     "typescript": "^5.3.3",
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^2.0.4"

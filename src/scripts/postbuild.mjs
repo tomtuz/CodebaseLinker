@@ -26,13 +26,13 @@ const distDefaultsPath = path.join(__dirname, "..", "..", "dist", "defaults");
 copyFolderSync(srcDefaultsPath, distDefaultsPath);
 
 // Copy codebaseStruct.d.ts
-const srcTypesPath = path.join(__dirname, "..", "codebaseStruct.d.ts");
+const srcTypesPath = path.join(__dirname, "../defaults", "codebaseStruct.ts");
 const distTypesPath = path.join(
   __dirname,
   "..",
   "..",
   "dist",
-  "codebaseStruct.d.ts",
+  "codebaseStruct.ts",
 );
 fs.copyFileSync(srcTypesPath, distTypesPath);
 
