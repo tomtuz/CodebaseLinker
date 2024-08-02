@@ -20,9 +20,6 @@ export async function loadConfiguration(
   configPath?: string,
   configRoot: string = process.cwd()
 ): Promise<CodebaseStruct> {
-  const log_settings = ({ Info: true, Debug: true, Verbose: true })
-  logger.setLevels(log_settings);
-
   // 1.1 Config Path Validation
   logger.verbose('1.1 Config Path Validation');
   // a) Check if the config path is provided
@@ -31,7 +28,7 @@ export async function loadConfiguration(
   }
   // b) Validate the provided path
   const resolvedPath = path.resolve(configRoot, configPath);
-  logger.info(`Config path: ${resolvedPath}\n`);
+  logger.info(`Config path: ${resolvedPath}`);
 
   // 1.2 Config File Access
   logger.verbose('1.2 Config File Access');
@@ -39,7 +36,7 @@ export async function loadConfiguration(
   // b) Attempt to access the file at the given path
   try {
     await isFileReadable(resolvedPath);
-    logger.verbose('[+] Config access\n', "custom");
+    logger.verbose('[+] Config access\n');
   } catch (error) {
     throw new ConfigFileAccessError(resolvedPath, error as Error);
   }
@@ -52,20 +49,23 @@ export async function loadConfiguration(
   try {
     const fileUrl = pathToFileURL(resolvedPath).href;
     // TSX import
-    const module = await tsImport(
+    const { module } = await tsImport(
       fileUrl,
       {
-        onImport: (url) => console.log('Imported:', url),
+        onImport: (url) => logger.verbose('Imported:', url),
         parentURL: import.meta.url,
       }
     );
-    config = module?.default;
+
+    logger.info("module: ", module)
+    config = module?.default.default;
+    logger.info("config: ", config)
 
     logger.verbose(
       'Raw imported configuration:\n',
       JSON.stringify(config, null, 2)
     );
-    logger.verbose('[+] Config parse\n', "custom");
+    logger.verbose('[+] Config parse\n');
   } catch (error) {
     throw new ConfigParseError(error as Error);
   }

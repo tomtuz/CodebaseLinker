@@ -1,4 +1,4 @@
-import { logger, LogLevel } from '../docs/output/logger_testing/logging_syntax';
+import { logger } from '@/utils/logger';
 import { loadConfiguration } from './config/configLoader';
 import { ProgramOptions } from './types/programOptions';
 import { resolveGlobalPatterns } from './file_processing/globalPatternResolver';
@@ -11,11 +11,10 @@ export async function processCodebase(options: ProgramOptions): Promise<void> {
 
   try {
     // Set log level based on options
-    const log_settings = ({ Info: true, Debug: options.debug, Verbose: false })
+    const log_settings = ({ Info: true, Debug: options.debug, Verbose: options.verbose })
     // const log_ndv = ({ Info: true, Debug: true, Verbose: true })
     // const log_nd = ({ Info: true, Debug: true })
     logger.setLevels(log_settings);
-    // logger.setLevel(options.debug ? LogLevel.Debug : LogLevel.Info);
 
     logger.header('Starting codebase processing');
     // logger.infoObj("CLI Options: ", options);
@@ -33,29 +32,23 @@ export async function processCodebase(options: ProgramOptions): Promise<void> {
     logger.step('2. Selecting Files');
     const selectedFiles = await resolveGlobalPatterns(codebaseStruct.options, options.patternMatch);
 
+    // 2.5 Resolve File Paths
+    const baseDir = process.cwd();
+    const relativePaths = selectedFiles.map((file) => path.relative(baseDir, file))
+
     // 3. File Processing and Aggregation
     logger.step('3. File Processing and Aggregation');
-    const { totalCharacters } = await processFiles(selectedFiles, codebaseStruct.options);
+    const { totalCharacters } = await processFiles(relativePaths, selectedFiles, codebaseStruct.options);
 
-    // 4. Display results
-    logger.step('4. Processing Results:');
-
-    if (logger.getLevels().Verbose) {
-      logger.verbose('Selected files:');
-      const baseDir = process.cwd();
-      for (const file of selectedFiles) {
-        logger.info(`- ${path.relative(baseDir, file)}`);
-      }
-    } else {
-      if (selectedFiles.length > 0) {
-        logger.status("ok", "info");
-      }
-    }
-
-    // 5. Summary
-    logger.step('5. Summary:');
-    logger.info(`- Files linked: ${selectedFiles.length}`);
-    logger.info(`- Total output characters: ${totalCharacters}`);
+    // 4. Summary
+    // logger.step('4. Summary:');
+    // if (logger.getLevels().Verbose) {
+    //   console.log(relativePaths.join('\n'))
+    // } else {
+    //   if (selectedFiles.length > 0) {
+    //     logger.status("ok", "info");
+    //   }
+    // }
 
   } catch (error: any) {
     logger.error(`An error occurred during codebase processing: ${error.message}`);

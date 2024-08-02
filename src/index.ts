@@ -19,6 +19,7 @@ program
   .option('-i, --input <directory>', 'Input directory')
   .option('-o, --output <file>', 'Output file name', 'cotext_output.md')
   .option('-f, --format <format>', 'Output format (md, json, yaml)', 'md')
+  .option('-v, --verbose', 'Enable verbose output')
   .option('-d, --debug', 'Enable debug output')
   .option('--pattern-match', 'Enable pattern match debugging')
   .action(async (options) => {

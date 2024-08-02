@@ -1,15 +1,21 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { logger, LogLevel } from '../../docs/output/logger_testing/logging_syntax';
+import { logger, OutputLevel } from '@/utils/logger';
 import { CodebaseStructOptions } from '@/types/codebaseStruct';
 
-export async function processFiles(filePaths: string[], options: CodebaseStructOptions): Promise<{ totalCharacters: number }> {
+export async function processFiles(relativePaths: string[], filePaths: string[], options: CodebaseStructOptions): Promise<{ totalCharacters: number }> {
   let totalCharacters = 0;
   const processedContents: string[] = [];
 
+  // set codebase map
+  processedContents.push(
+    createCodeBlock("Project Directory Structure", "", relativePaths.join('\n'))
+  )
+
+  const baseDir = process.cwd();
   for (const filePath of filePaths) {
     try {
-      logger.verbose(filePath);
+      logger.verbose(path.relative(baseDir, filePath));
       const content = await fs.readFile(filePath, 'utf-8');
       const formattedContent = formatContent(filePath, content, options.format);
       processedContents.push(formattedContent);
@@ -20,9 +26,16 @@ export async function processFiles(filePaths: string[], options: CodebaseStructO
   }
 
   const outputPath = path.resolve(process.cwd(), options.output || 'codebase-context.md');
+  if (logger.getLevels().Verbose) {
+    logger.info('\n');
+  }
+
+  logger.info(`- Files linked: ${filePaths.length}`);
+  logger.info(`- Total output characters: ${totalCharacters}`);
+  logger.info(`Output written to: ${outputPath}`);
+
   try {
     await fs.writeFile(outputPath, processedContents.join('\n\n'));
-    logger.info(`\nOutput written to: ${outputPath}`);
   } catch (error) {
     logger.error(`Failed to write output file: ${error}`);
   }

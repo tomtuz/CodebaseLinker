@@ -21,6 +21,7 @@
     "dev": "tsx src/index.ts -d -c .cotext/test.config.ts",
     "bin": "tsx run_binary.ts",
     "build": "tsup src/index.ts",
+    "build-run": "tsup src/index.ts && pnpm run dev",
     "debug_build": "node dist/index.js -d -c .cotext/test.config.ts",
     "debug_tsx": "tsx src/index.ts -d -c .cotext/test.config.ts",
     "build_bin": "go build -o bin/mybinary.exe main.go",
@@ -49,7 +50,6 @@
   "dependencies": {
     "commander": "^11.0.0",
     "fast-glob": "^3.3.2",
-    "importx": "^0.4.3",
     "minimatch": "^10.0.1",
     "picocolors": "^1.0.1",
     "tsx": "4.16.2",

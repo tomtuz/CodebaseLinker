@@ -80,24 +80,16 @@ class Logger {
   }
 
   infoObj(message?: any, ...optionalParams: any[]): void {
-    // if (this.level.Verbose) {
-    //   console.log(`${message}\n${JSON.stringify(optionalParams, null, 2)}`);
-    // }
     console.log(`${message}\n${JSON.stringify(optionalParams, null, 2)}`);
   }
 
   debug(message?: any, ...optionalParams: any[]): void {
-    // if (this.level.Verbose) {
-
-    // }
     if (this.level?.Debug || this.level?.Verbose) {
-      // console.warn(picocolors.red(message), ...optionalParams);
       console.warn(message, ...optionalParams);
     }
   }
 
   verbose(message?: any, ...optionalParams: any[]): void {
-    console.log("this.level.Verbose? : ", this.level.Verbose)
     if (this.level?.Verbose) {
       console.log(message, ...optionalParams);
     }
@@ -113,7 +105,6 @@ class Logger {
 
   step(message?: any, ...optionalParams: any[]): void {
     const divider = "-".repeat(message.length);
-    // const header_line = `\n${message}\n${divider}`
     const header_line = `\n${picocolors.blue(message)}\n${divider}`
     console.log(header_line);
   }
@@ -129,7 +120,6 @@ class Logger {
   }
 
   status(message?: any, status_type?: "success" | "error" | "info" | "custom"): void {
-    // console.log("\n")
     switch (status_type) {
       case "success":
         console.log(`${picocolors.green(this.status_prefix.success.ascii)} ${message}`);

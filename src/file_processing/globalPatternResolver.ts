@@ -1,6 +1,6 @@
 import { DEFAULT_EXCLUSIONS } from '@/utils/defaultPatterns';
 import { CodebaseStructOptions } from '@/types/codebaseStruct';
-import { logger, LogLevel } from '../../docs/output/logger_testing/logging_syntax';
+import { logger } from '@/utils/logger';
 import fastGlob from 'fast-glob';
 import path from 'node:path';
 import { minimatch } from 'minimatch';
