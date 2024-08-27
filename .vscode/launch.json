@@ -11,7 +11,39 @@
       "type": "node-terminal",
       "request": "launch",
       "name": "Debug TSX",
-      "command": "npm run dev"
+      "command": "npm run debug_tsx"
+    },
+    {
+      "type": "node-terminal",
+      "request": "launch",
+      "name": "Debug Build External",
+      "command": "npm run build && npm run debug_build_external"
+    },
+    {
+      "type": "node-terminal",
+      "request": "launch",
+      "name": "Debug TSX External",
+      "command": "npm run debug_tsx_external"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug TSX Package",
+      "program": "${workspaceFolder}/dist/index.js",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+      "args": ["-c", ".cotext/test.config.ts"],
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": ["-r", "tsx"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/node_modules/src/**",
+        "!**/node_modules/**"
+      ],
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json"
+      },
+      "console": "integratedTerminal"
     }
   ]
 }

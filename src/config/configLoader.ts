@@ -1,7 +1,7 @@
-import path from 'node:path';
-import { pathToFileURL } from 'node:url';
-import { CodebaseStruct } from '@/types/codebaseStruct';
-import { logger } from '@/utils/logger';
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+import { CodebaseStruct } from "@/types/codebaseStruct";
+import { logger } from "@/utils/logger";
 
 import {
   ConfigPathNotProvidedError,
@@ -9,19 +9,22 @@ import {
   ConfigParseError,
   InvalidConfigurationError,
   ConfigUndefinedError,
-} from '@/errors/ConfigurationErrors';
-import { isFileReadable } from './loaderUtils';
-import { validateConfig } from './validate';
-import { DEFAULT_CONFIG } from '@/defaults/defaultConfig';
-import { deepMerge, DeepPartial } from '@/utils/objectUtils';
-import { tsImport } from 'tsx/esm/api';
+} from "@/errors/ConfigurationErrors";
+import { isFileReadable } from "./loaderUtils";
+import { validateConfig } from "./validate";
+import { DEFAULT_CONFIG } from "@/defaults/defaultConfig";
+import { deepMerge, DeepPartial } from "@/utils/objectUtils";
+
+import { tsImport } from "tsx/esm/api";
+// dev-only
+// import { tsImport } from "tsx-dev/esm/api";
 
 export async function loadConfiguration(
   configPath?: string,
-  configRoot: string = process.cwd()
+  configRoot: string = process.cwd(),
 ): Promise<CodebaseStruct> {
   // 1.1 Config Path Validation
-  logger.verbose('1.1 Config Path Validation');
+  logger.verbose("1.1 Config Path Validation");
   // a) Check if the config path is provided
   if (!configPath) {
     throw new ConfigPathNotProvidedError();
@@ -31,41 +34,47 @@ export async function loadConfiguration(
   logger.info(`Config path: ${resolvedPath}`);
 
   // 1.2 Config File Access
-  logger.verbose('1.2 Config File Access');
+  logger.verbose("1.2 Config File Access");
   // a) Resolve the path relative to the current working directory
   // b) Attempt to access the file at the given path
   try {
     await isFileReadable(resolvedPath);
-    logger.verbose('[+] Config access\n');
+    logger.verbose("[+] Config access\n");
   } catch (error) {
     throw new ConfigFileAccessError(resolvedPath, error as Error);
   }
 
   // 1.3 Config Parsing
-  logger.verbose('1.3 Config Parsing');
+  logger.verbose("1.3 Config Parsing");
   // a) Load the configuration file
   // b) Parse the configuration content
   let config: unknown;
   try {
     const fileUrl = pathToFileURL(resolvedPath).href;
     // TSX import
-    const { module } = await tsImport(
+    console.log("metaURL: ", import.meta.url);
+    const module = await tsImport(
+      // const { module } = await tsImport(
       fileUrl,
       {
-        onImport: (url) => logger.verbose('Imported:', url),
+        onImport: (url) => logger.info("Imported:", url),
         parentURL: import.meta.url,
-      }
+      },
     );
 
-    logger.info("module: ", module)
-    config = module?.default.default;
-    logger.info("config: ", config)
+    // logger.info("module: ", module)
+    logger.info("module: ");
+    logger.info(JSON.stringify(module, null, 2));
+
+    // config = module?.default;
+    config = module?.default?.default || module?.default;
+    logger.info("config: ", config);
 
     logger.verbose(
-      'Raw imported configuration:\n',
-      JSON.stringify(config, null, 2)
+      "Raw imported configuration:\n",
+      JSON.stringify(config, null, 2),
     );
-    logger.verbose('[+] Config parse\n');
+    logger.verbose("[+] Config parse\n");
   } catch (error) {
     throw new ConfigParseError(error as Error);
   }
@@ -75,26 +84,41 @@ export async function loadConfiguration(
   }
 
   // 1.4 Config Merging
-  logger.verbose('1.4 Config Merging');
-  logger.verbose('Default configuration:\n', JSON.stringify(DEFAULT_CONFIG, null, 2), "\n");
+  logger.verbose("1.4 Config Merging");
+  logger.verbose(
+    "Default configuration:\n",
+    JSON.stringify(DEFAULT_CONFIG, null, 2),
+    "\n",
+  );
 
   // a) Merge the loaded configuration with the default configuration
-  const mergedConfig = deepMerge<CodebaseStruct>(DEFAULT_CONFIG, config as DeepPartial<CodebaseStruct>);
+  const mergedConfig = deepMerge<CodebaseStruct>(
+    DEFAULT_CONFIG,
+    config as DeepPartial<CodebaseStruct>,
+  );
 
   // 1.5 Config Validation
-  logger.verbose('1.5 Config Validation');
+  logger.verbose("1.5 Config Validation");
   // a) Check if the merged configuration adheres to the expected CodebaseStruct interface
   // b) Validate specific fields and their types
-  if (!await validateConfig(mergedConfig)) {
-    logger.verbose('Merged configuration:\n', JSON.stringify(mergedConfig, null, 2), "\n");
-    throw new InvalidConfigurationError('Invalid configuration structure');
+  if (!(await validateConfig(mergedConfig))) {
+    logger.verbose(
+      "Merged configuration:\n",
+      JSON.stringify(mergedConfig, null, 2),
+      "\n",
+    );
+    throw new InvalidConfigurationError("Invalid configuration structure");
   }
-  logger.verbose('[+] Config valid\n');
+  logger.verbose("[+] Config valid\n");
 
   // 1.6 Logging
-  logger.verbose('1.6 Logging');
+  logger.verbose("1.6 Logging");
   // a) Log the final configuration (at debug level)
-  logger.verbose('Final configuration:', JSON.stringify(mergedConfig, null, 2), "\n");
+  logger.verbose(
+    "Final configuration:",
+    JSON.stringify(mergedConfig, null, 2),
+    "\n",
+  );
 
   return mergedConfig;
 }

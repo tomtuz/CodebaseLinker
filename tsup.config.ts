@@ -2,12 +2,15 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   format: ["esm"],
-  platform: 'node',
+  platform: "node",
   dts: true,
   splitting: false,
   clean: true,
   // minify: true,
   entry: ["src/index.ts"],
   // avoid bundling entire libraries
-  external: ['tsx', 'esbuild'],
+  external: ["tsx", "esbuild"],
+
+  // DEV only
+  // external: ['tsx', 'tsx-dev', 'esbuild'],
 });

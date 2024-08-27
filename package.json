@@ -23,7 +23,9 @@
     "build": "tsup src/index.ts",
     "build-run": "tsup src/index.ts && pnpm run dev",
     "debug_build": "node dist/index.js -d -c .cotext/test.config.ts",
+    "debug_build_external": "pnpm node dist/index.js -d -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
     "debug_tsx": "tsx src/index.ts -d -c .cotext/test.config.ts",
+    "debug_tsx_external": "tsx src/index.ts -d -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
     "build_bin": "go build -o bin/mybinary.exe main.go",
     "start": "tsx src/index.ts",
     "dev:init": "tsx src/index.ts init",
@@ -66,5 +68,5 @@
     "vite-tsconfig-paths": "^4.3.2",
     "vitest": "^2.0.4"
   },
-  "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e"
+  "packageManager": "pnpm@9.8.0"
 }

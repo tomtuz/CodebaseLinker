@@ -6,13 +6,13 @@ export interface CodebaseStructOptions {
   name?: string;
 
   /** Base URL for resolving relative paths */
-  baseUrl?: string;
+  baseUrl: string;
 
   /** Base URL for output files */
   outUrl?: string;
 
   /** Global output file name */
-  output?: string;
+  output: string;
 
   /** Default format for code blocks */
   format?: string;
@@ -22,17 +22,30 @@ export interface CodebaseStructOptions {
    * - 'include': Only explicitly included files will be processed
    * - 'exclude': All files except explicitly excluded ones will be processed
    */
-  selectionMode: 'include' | 'exclude';
+  // selectionMode: "include" | "exclude";
+  // TODO: find a better workaround
+  selectionMode: "include" | "exclude" | string;
 
   /**
    * Array of glob patterns for file selection
    * - In 'include' mode: Patterns specify which files to include
    * - In 'exclude' mode: Patterns specify which files to exclude
-   * 
+   *
    * Patterns are processed in order, allowing for overrides.
    * Use negative patterns (starting with !) to negate a previous pattern.
    */
   patterns: string[];
+
+  // EXTENDED
+  // TODO: validate and document
+  // input: string;
+  config?: string;
+  debug?: boolean;
+  verbose?: boolean;
+  include?: string[];
+  exclude?: string[];
+  patternMatch: boolean;
+  patternLogs?: string;
 }
 
 /**
