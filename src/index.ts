@@ -67,3 +67,5 @@ program
   });
 
 program.parse(process.argv);
+
+export default program;

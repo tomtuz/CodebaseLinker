@@ -1,17 +1,30 @@
 This package is meant to be usable without installation to avoid collisions with the codebase.
 It is excluded from git during initialization and placed in a `.cotext` folder.
-Not tested on linux for now.
 
-## Setup
+You can use this in:
+- CLI mode: easy, quick file aggregation
+- Application mode: repeated, custom behaviour with configuration file `cotext.config.ts`
+
+## Run
 ```sh
-# initialize configuration files
+# sane defaults, scan top-level files
+cotext
+
+# show [Verbose] [Debug] info, supply [Input] directory path
+cotext -v -d -i /home/username/my_folder
+
+# use without installation
+npx github:tomtuz/CodebaseLinker cotext -v -d -i /home/username/my_folder
+pnpm dlx github:tomtuz/CodebaseLinker cotext -v -d -i /home/username/my_folder
+
+# initialize configuration files (for 'Application Mode')
 # - stored at '.cotext' dir (default)
 # - excluded from git (in .git/info/exclude file)
 # - has type files included
-pnpm dlx cotext init
+cotext init
 
 # run configuration files
-pnpm dlx cotext -c <path-to-config>
+cotext -c <path-to-config>
 ```
 
 **Config example:**

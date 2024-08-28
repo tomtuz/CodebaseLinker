@@ -11,8 +11,17 @@ const config: CodebaseStruct = {
       '!**/src/**/*.test.ts', // This negative pattern re-includes .test.ts files in the src directory
     ],
     format: 'ts',
-    output: 'codebase-context.md'
-  }
+    output: 'codebase-context.md',
+    // EXTENDED
+    // TODO: validate and document
+    config: "",
+    debug: false,
+    verbose: false,
+    include: [],
+    exclude: [],
+    patternMatch: false,
+    patternLogs: "",
+  },
 };
 
 const test_config: CodebaseStruct = {
@@ -27,6 +36,15 @@ const test_config: CodebaseStruct = {
       'types/react.ts',
     ],
     format: 'tsx',
-    output: 'codebase-context.md'
+    output: 'codebase-context.md',
+    // EXTENDED
+    // TODO: validate and document
+    config: "",
+    debug: false,
+    verbose: false,
+    include: [],
+    exclude: [],
+    patternMatch: false,
+    patternLogs: "",
   }
 };

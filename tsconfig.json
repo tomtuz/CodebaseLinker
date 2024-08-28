@@ -12,20 +12,16 @@
     "alwaysStrict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "rootDir": ".",
+    "outDir": "dist",
+    "rootDir": "src",
     "baseUrl": ".",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
     "resolveJsonModule": true,
     "paths": {
       "@/*": ["src/*"],
       "@defaults/*": ["defaults/*"],
       "@test/*": ["tests/*"]
-      // "@test/*": ["example/*"],
     }
   },
-  "include": ["src/**/*", "tests/**/*"],
-  "exclude": ["node_modules", "dist", "example/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "example/**/*", "tests/**/*"],
 }
