@@ -7,3 +7,5 @@ docs/.self
 
 *.md
 *.exe
+
+.pm-indicator

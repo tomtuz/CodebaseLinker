@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { logger, OutputLevel } from "@/utils/logger";
+import { logger } from "@/utils/logger";
 import { CodebaseStructOptions } from "@/types/codebaseStruct";
+import { FormattingError } from "@/errors/FileProcessorErrors"
 
 export async function processFiles(
   relativePaths: string[],

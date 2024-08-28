@@ -68,4 +68,4 @@ program
 
 program.parse(process.argv);
 
-export default program;
+export const cli = program;

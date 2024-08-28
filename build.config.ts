@@ -1,18 +1,13 @@
 import { defineBuildConfig } from "unbuild";
-import { cpSync } from 'node:fs'
-import { join } from 'node:path'
+import { copyFile, cpSync } from 'node:fs'
 import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 
 export default defineBuildConfig([
   {
-    name: "ESM only",
+    entries: ['./src/index'],
     outDir: "dist",
-    entries: [
-      'src/index.ts',
-    ],
     clean: true,
-    sourcemap: true,
-    declaration: true,
     failOnWarn: false,
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -20,14 +15,7 @@ export default defineBuildConfig([
     },
     rollup: {
       inlineDependencies: true,
-      dts: {
-        compilerOptions: {
-          emitDeclarationOnly: true,
-        },
-      },
-      esbuild: {
-        minify: true,
-      },
+      emitCJS: false,
     },
     hooks: {
       'build:done': () => {
@@ -38,8 +26,13 @@ export default defineBuildConfig([
           {
             recursive: true,
           },
-        )
+        ),
+        copyFile('./bin/cli.js', './dist/cli.js', (err) => {
+          if (err) throw err;
+          console.log('cli.js copied to dist/');
+        });
       },
     },
+    externals: ['esbuild', 'rollup'],
   },
 ]);

@@ -1,5 +1,5 @@
 import { DEFAULT_EXCLUSIONS } from "@/utils/defaultPatterns";
-import { CodebaseStruct, CodebaseStructOptions } from "@/types/codebaseStruct";
+import { CodebaseStructOptions } from "@/types/codebaseStruct";
 import { logger } from "@/utils/logger";
 import fastGlob from "fast-glob";
 import path from "node:path";
@@ -9,21 +9,21 @@ import {
   PatternError,
   FileResolutionError,
 } from "@/errors/GlobErrors";
-import { LogWriter } from "@/utils/logWriter";
+// import { LogWriter } from "@/utils/logWriter";
 
-function logPatternMatch(
-  file: string,
-  pattern: string,
-  matched: boolean,
-  patternLogWriter: LogWriter | null,
-) {
-  const logMessage = `File: ${file}\n  Pattern: ${pattern}\n  Matched: ${matched}\n`;
-  if (patternLogWriter) {
-    patternLogWriter.writeLog(logMessage);
-  } else {
-    logger.info(logMessage);
-  }
-}
+// function logPatternMatch(
+//   file: string,
+//   pattern: string,
+//   matched: boolean,
+//   patternLogWriter: LogWriter | null,
+// ) {
+//   const logMessage = `File: ${file}\n  Pattern: ${pattern}\n  Matched: ${matched}\n`;
+//   if (patternLogWriter) {
+//     patternLogWriter.writeLog(logMessage);
+//   } else {
+//     logger.info(logMessage);
+//   }
+// }
 
 export async function resolveGlobalPatterns(
   fileConfig: CodebaseStructOptions,

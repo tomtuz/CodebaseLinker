@@ -1,6 +1,7 @@
 {
   "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
+  "eslint.enable": false, 
   "eslint.useFlatConfig": false,
   "editor.codeActionsOnSave": [
     "source.addMissingImports",
