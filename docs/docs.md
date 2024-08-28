@@ -21,3 +21,17 @@ After build, this is not needed, as it uses files placed in 'dist' folder by pos
 ```
 tsx src/index.ts -d -i C:\Users\tto\Desktop\tamper\linker
 ```
+
+
+# Running preinstalled .tgz
+
+```jsonc
+//  remove 'bin' reference, which usually runs node
+"bin": {
+  "cotext": "./bin/cli.js"
+},
+// add script to install tar package
+"scripts": {
+  "prepare": "pnpm install ./bin/prebuilt/cotext-1.0.0.tgz",
+}
+```

@@ -13,9 +13,8 @@ cotext
 # show [Verbose] [Debug] info, supply [Input] directory path
 cotext -v -d -i /home/username/my_folder
 
-# use without installation
-npx github:tomtuz/CodebaseLinker cotext -v -d -i /home/username/my_folder
-pnpm dlx github:tomtuz/CodebaseLinker cotext -v -d -i /home/username/my_folder
+# use without installation (only 'npx' for now, 'dlx' breaks) 
+npx github:tomtuz/CodebaseLinker -v -d -i /home/username/my_folder
 
 # initialize configuration files (for 'Application Mode')
 # - stored at '.cotext' dir (default)
