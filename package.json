@@ -18,7 +18,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "bin/prebuilt"
   ],
   "author": "tomtuz",
   "license": "ISC",
@@ -35,7 +36,8 @@
     "build": "unbuild",
     "build-run": "unbuild && pnpm run dev",
     "start": "node dist/index.mjs",
-    "pack": "pnpm pack --pack-destination='bin/prebuilt'",
+    "pack": "pnpm pack --pack-gzip-level=9 --pack-destination='bin/prebuilt'",
+    "prepare": "unbuild",
     "debug_build": "node dist/index.mjs -d -c .cotext/test.config.ts",
     "debug_build_external": "pnpm node dist/index.mjs -d -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
     "debug_tsx": "tsx src/index.ts -d -c .cotext/test.config.ts",
