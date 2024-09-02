@@ -107,10 +107,10 @@ export async function resolveGlobalPatterns(
       //    - Get all files using fast-glob
       //    - Filter out files that match any of the exclude patterns using minimatch
       const allFiles = await fastGlob("**/*", globOptions);
-      
+
       // Parallel processing for exclude mode
       const chunkSize = 1000; // Adjust this value based on your needs
-      const chunks = [];
+      const chunks: string[][] = [];
       for (let i = 0; i < allFiles.length; i += chunkSize) {
         chunks.push(allFiles.slice(i, i + chunkSize));
       }
