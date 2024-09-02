@@ -107,13 +107,26 @@ export async function resolveGlobalPatterns(
       //    - Get all files using fast-glob
       //    - Filter out files that match any of the exclude patterns using minimatch
       const allFiles = await fastGlob("**/*", globOptions);
-      selectedFiles = allFiles.filter((file) => {
-        const relativePath = path.relative(cwd, file);
-        const shouldExclude = processedPatterns.some((pattern) =>
-          minimatch(relativePath, pattern, { dot: true }),
-        );
-        return !shouldExclude;
-      });
+      
+      // Parallel processing for exclude mode
+      const chunkSize = 1000; // Adjust this value based on your needs
+      const chunks = [];
+      for (let i = 0; i < allFiles.length; i += chunkSize) {
+        chunks.push(allFiles.slice(i, i + chunkSize));
+      }
+
+      const filterChunk = async (chunk: string[]) => {
+        return chunk.filter((file) => {
+          const relativePath = path.relative(cwd, file);
+          const shouldExclude = processedPatterns.some((pattern) =>
+            minimatch(relativePath, pattern, { dot: true }),
+          );
+          return !shouldExclude;
+        });
+      };
+
+      const filteredChunks = await Promise.all(chunks.map(filterChunk));
+      selectedFiles = filteredChunks.flat();
     }
 
     // TODO: re-enable

@@ -1,7 +1,7 @@
-import { VectorizedOptions } from "./configTypes";
+import { ConfigIndex } from "./configTypes";
 
 export function setBooleanOption(
-  options: VectorizedOptions,
+  options: ConfigIndex,
   index: number,
   value: boolean,
 ): void {
@@ -10,7 +10,7 @@ export function setBooleanOption(
 }
 
 export function getBooleanOption(
-  options: VectorizedOptions,
+  options: ConfigIndex,
   index: number,
 ): boolean | undefined {
   return options.changedFlags[0] & (1 << index)
@@ -19,7 +19,7 @@ export function getBooleanOption(
 }
 
 export function setStringOption(
-  options: VectorizedOptions,
+  options: ConfigIndex,
   index: number,
   value: string | undefined,
 ): void {
@@ -30,7 +30,7 @@ export function setStringOption(
 }
 
 export function getStringOption(
-  options: VectorizedOptions,
+  options: ConfigIndex,
   index: number,
 ): string | undefined {
   return options.changedFlags[1] & (1 << index)
@@ -39,7 +39,7 @@ export function getStringOption(
 }
 
 export function setArrayOption(
-  options: VectorizedOptions,
+  options: ConfigIndex,
   index: number,
   value: string[] | undefined,
 ): void {
@@ -50,7 +50,7 @@ export function setArrayOption(
 }
 
 export function getArrayOption(
-  options: VectorizedOptions,
+  options: ConfigIndex,
   index: number,
 ): string[] | undefined {
   return options.changedFlags[2] & (1 << index)
@@ -58,7 +58,7 @@ export function getArrayOption(
     : undefined;
 }
 
-export function serializeOptions(options: VectorizedOptions): string {
+export function serializeOptions(options: ConfigIndex): string {
   return JSON.stringify({
     b: Array.from(options.booleans),
     s: options.strings,
@@ -67,7 +67,7 @@ export function serializeOptions(options: VectorizedOptions): string {
   });
 }
 
-export function deserializeOptions(serialized: string): VectorizedOptions {
+export function deserializeOptions(serialized: string): ConfigIndex {
   const data = JSON.parse(serialized);
   return {
     booleans: new Uint8Array(data.b),

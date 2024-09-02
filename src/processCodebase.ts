@@ -3,60 +3,62 @@ import { resolveGlobalPatterns } from "./file_processing/globalPatternResolver";
 import { processFiles } from "./file_processing/fileProcessor";
 import path from "node:path";
 import { createLogWriter, LogWriter } from "./utils/logWriter";
-import { VectorizedOptions } from "./utils/serializer/configTypes";
-import {
-  resolveCliOptions,
-  translateVector,
-} from "./utils/serializer/optionResolver";
+import { CodebaseStructOptions } from "@/types/codebaseStruct";
+import { loadConfiguration } from "./config/configLoader";
+import { DEFAULT_CONFIG } from "./defaults/defaultConfig";
+import { isDefaultConfig } from "./utils/configIndexManager";
+
+// Cache for loaded configurations
+const configCache = new Map<string, CodebaseStructOptions>();
+
+async function lazyLoadConfig(
+  config: CodebaseStructOptions,
+  config_type: string,
+): Promise<CodebaseStructOptions> {
+  if (config_type === "app") {
+    // if (!isDefaultConfig({ cli: {}, app: config }) && config.config) {
+    const cacheKey = config?.config || "";
+
+    if (configCache.has(cacheKey)) {
+      const cachedConfig = configCache.get(cacheKey);
+      if (cachedConfig) {
+        return cachedConfig;
+      }
+    }
+
+    logger.step("1. Loading Configuration File");
+    const loadedConfig = await loadConfiguration(config.config, process.cwd());
+    if (!loadedConfig) {
+      throw new Error("Invalid or empty configuration loaded");
+    }
+
+    configCache.set(cacheKey, loadedConfig.options);
+    return loadedConfig.options;
+  }
+
+  logger.step("1. Using Default Configuration");
+  return DEFAULT_CONFIG.options;
+}
 
 export async function processCodebase(
-  vectorConfig: VectorizedOptions,
+  config: CodebaseStructOptions,
+  config_type: string,
 ): Promise<void> {
   const errors: Error[] = [];
-  const logLevels = logger.getLevels();
-  let patternLogWriter: LogWriter | null = null;
-
-  // 0. Config options are pre-handled and correct
-  const defaultConfig = translateVector(vectorConfig);
-  // const defaultConfig = resolveCliOptions(vectorConfig);
 
   try {
     // Set log level based on options
-    const log_settings = {
+    logger.setLevels({
       Info: true,
-      Debug: defaultConfig.debug,
-      Verbose: defaultConfig.verbose,
-    };
-    logger.setLevels(log_settings);
+      Debug: config.debug,
+      Verbose: config.verbose,
+    });
 
     logger.header("Starting codebase processing");
-    logger.verbose("CLI Options: ", defaultConfig);
+    logger.verbose("Config: ", config);
 
-    // Initialize pattern log writer if pattern-match is enabled
-    if (defaultConfig.patternMatch) {
-      patternLogWriter = createLogWriter(
-        defaultConfig.patternLogs || "cotext.pattern.logs",
-      );
-    }
-
-    const configSupplied = !!defaultConfig.config;
-    const fileConfig = defaultConfig;
-
-    // TODO: re-enable
-    // const fileConfig = configSupplied
-    //   ? await loadConfiguration(defaultConfig.config, defaultConfig.baseUrl)
-    //   : defaultConfig;
-
-    // let fileConfig = {};
-    if (configSupplied) {
-      logger.step("1. Configuration Loading");
-
-      if (!fileConfig) {
-        throw new Error("Invalid or empty configuration loaded");
-      }
-    } else {
-      logger.step("1. Using Default Configuration");
-    }
+    // Lazy load configuration
+    const fileConfig = await lazyLoadConfig(config, config_type);
 
     // 2. Global Pattern Resolution
     logger.step("2. Selecting Files");
@@ -76,13 +78,18 @@ export async function processCodebase(
       fileConfig,
     );
     logger.info(`Total characters processed: ${totalCharacters}`);
+
+    // Initialize pattern log writer only if needed
+    if (config.patternMatch) {
+      const patternLogWriter = createLogWriter(
+        config.patternLogs || "cotext.pattern.logs",
+      );
+      logger.info(
+        `Pattern match logs have been saved to: ${patternLogWriter.getFilePath()}`,
+      );
+    }
   } catch (error: any) {
     errors.push(error);
-  }
-
-  // Show alternative options
-  if (!logLevels.Verbose) {
-    logger.info("\n[Details hidden, use --verbose to show]");
   }
 
   // Display total process status
@@ -93,7 +100,7 @@ export async function processCodebase(
     errors.forEach((error, index) => {
       logger.error(`Error ${index + 1}:`);
       logger.error(`  Message: ${error.message}`);
-      if (defaultConfig.debug) {
+      if (config.debug) {
         logger.error(`  Stack trace: ${error.stack}`);
       }
       logger.error("");
@@ -102,9 +109,8 @@ export async function processCodebase(
     logger.status("Completed successfully.", "success");
   }
 
-  if (defaultConfig.patternMatch) {
-    logger.info(
-      `Pattern match logs have been saved to: ${defaultConfig.patternLogs || "cotext.pattern.logs"}`,
-    );
+  // Show alternative options
+  if (!config.verbose) {
+    logger.info("\n[Details hidden, use --verbose to show]");
   }
 }

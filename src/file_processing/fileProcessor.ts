@@ -65,7 +65,7 @@ function formatContent(
 
     return createCodeBlock(relativeFilePath, fileExtension, content);
   } catch (error) {
-    throw new FormattingError(
+    throw new Error(
       `Failed to format content for ${filePath}: ${error}`,
     );
   }

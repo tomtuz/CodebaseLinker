@@ -23,7 +23,6 @@
       "@/*": ["src/*"],
       "@defaults/*": ["defaults/*"],
       "@test/*": ["tests/*"]
-      // "@test/*": ["example/*"],
     }
   },
   "include": ["src/**/*", "tests/**/*"],

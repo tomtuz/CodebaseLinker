@@ -1,8 +1,9 @@
 export interface ProgramOptions {
   /** Path to the configuration file */
   config?: string;
-  // TODO: document
+  /** Include glob paths */
   include: string[];
+  /** Exclude glob paths */
   exclude: string[];
   /** Input directory */
   input?: string;

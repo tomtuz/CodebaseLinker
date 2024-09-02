@@ -1,69 +1,69 @@
-import { Command } from "commander";
+import { parseArgs } from "node:util";
 import { processCodebase } from "./processCodebase";
-import packageJson from "../package.json";
-import { resolveCliOptions } from "./utils/resolveCli";
+import { translateConfigIndex } from "./utils/configIndexManager";
 import { CLI_DEFAULTS } from "./defaults/defaultConfig";
-// TODO: re-enable configuration file
-// import { initializeProject } from "./init/projectInitializer";
+import { ProgramOptions } from "./types/programOptions";
+import { resolveCliOptions } from "./utils/serializer/configTypes";
 
-const program = new Command();
-
-program
-  .name("cotext")
-  .version(packageJson.version)
-  .description("A CLI tool to aggregate codebase files for context generation")
-  // CONFIG based configuration
-  .option(
-    "-c, --config <file>",
-    "Path to the configuration file",
-    CLI_DEFAULTS.config,
-  )
-  // CLI based configuration
-  .option(
-    "--include [types...]",
-    "include file patterns CLI",
-    CLI_DEFAULTS.include,
-  )
-  .option(
-    "--exclude [types...]",
-    "exclude file patterns CLI",
-    CLI_DEFAULTS.exclude,
-  )
-  // Set remote path (BaseUrl)
-  .option("-i, --input <directory>", "Input directory", CLI_DEFAULTS.input)
-  // Formatting options
-  .option("-o, --output <file>", "Output file name", CLI_DEFAULTS.output)
-  .option(
-    "-f, --format <format>",
-    "Output format (md, json, yaml)",
-    CLI_DEFAULTS.format,
-  )
-  // Output settings
-  .option("-v, --verbose", "Enable verbose output", CLI_DEFAULTS.verbose)
-  .option("-d, --debug", "Enable debug output", CLI_DEFAULTS.debug)
-  .option(
-    "--pattern-match",
-    "Enable pattern match debugging",
-    CLI_DEFAULTS.patternMatch,
-  )
-  .option("--logs <file>", "Save logs to a file", CLI_DEFAULTS.logs)
-  .option(
-    "--pattern-logs <file>",
-    "Save pattern match logs to a file",
-    CLI_DEFAULTS.patternLogs,
-  )
-  .action(async (options) => {
-    try {
-      const startTime = performance.now();
-      const vectorizedOptions = resolveCliOptions(options);
-      await processCodebase(vectorizedOptions);
-      const endTime = performance.now();
-      const result = ((endTime - startTime) / 1000).toFixed(5);
-      console.log(`Execution time: ${result} ms`);
-    } catch (error: any) {
-      console.error(`An error occurred: ${error.message}`);
-      process.exit(1);
-    }
+// Directly map configuration options to ProgramOptions
+const parseOptions = (): Partial<ProgramOptions> => {
+  const { values } = parseArgs({
+    options: {
+      config: { type: "string", short: "c", default: CLI_DEFAULTS.config },
+      include: {
+        type: "string",
+        multiple: true,
+        default: CLI_DEFAULTS.include,
+      },
+      exclude: {
+        type: "string",
+        multiple: true,
+        default: CLI_DEFAULTS.exclude,
+      },
+      input: { type: "string", short: "i", default: CLI_DEFAULTS.input },
+      output: { type: "string", short: "o", default: CLI_DEFAULTS.output },
+      format: { type: "string", short: "f", default: CLI_DEFAULTS.format },
+      verbose: { type: "boolean", short: "v", default: CLI_DEFAULTS.verbose },
+      debug: { type: "boolean", short: "d", default: CLI_DEFAULTS.debug },
+      "pattern-match": { type: "boolean", default: CLI_DEFAULTS.patternMatch },
+      logs: { type: "string", default: CLI_DEFAULTS.logs },
+      "pattern-logs": { type: "string", default: CLI_DEFAULTS.patternLogs },
+    },
   });
 
-program.parse(process.argv);
+  return values as Partial<ProgramOptions>;
+};
+
+const main = async () => {
+  try {
+    const startTime = process.hrtime.bigint();
+
+    // old_approach
+    // 1. > I: _, O:ProgramOptions
+    // const options = parseOptions();
+    // 2. > I: ProgamOptions, O: CodebaseStructOptions
+    // const resolvedConfig = resolveConfig(options);
+    // 3. > I: ResolvedConfig, O: ConfigIndex
+    // const configIndex = createConfigIndex(resolvedConfig);
+
+    const options = parseOptions();
+
+    // 1. > I: ProgamOptions, O: ConfigIndex
+    const configIndex = resolveCliOptions(options);
+
+    // 2. > I: ConfigIndex, O: CodebaseStructOptions
+    const codebaseStructOptions = translateConfigIndex(configIndex);
+
+    const config_type = options.config ? "app" : "cli";
+    await processCodebase(codebaseStructOptions, config_type);
+
+    const endTime = process.hrtime.bigint();
+    const executionTime = Number(endTime - startTime) / 1e9;
+    console.log(`Execution time: ${executionTime.toFixed(5)} s`);
+  } catch (error: any) {
+    console.error(`An error occurred: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+main();

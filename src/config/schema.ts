@@ -1,18 +1,26 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-const CodebaseStructOptionsSchema = z.object({
-  name: z.string().optional(),
-  baseUrl: z.string().optional(),
-  outUrl: z.string().optional(),
-  output: z.string().optional(),
-  format: z.string().optional(),
-  selectionMode: z.enum(['include', 'exclude']),
-  patterns: z.array(z.string()).min(1),
-}).strict();
+const CodebaseStructOptionsSchema = z
+  .object({
+    name: z.string().optional(),
+    baseUrl: z.string().optional(),
+    outUrl: z.string().optional(),
+    output: z.string().optional(),
+    format: z.string().optional(),
+    selectionMode: z.enum(["include", "exclude"]),
+    patterns: z.array(z.string()).min(1),
+    verbose: z.boolean().optional(),
+    debug: z.boolean().optional(),
+    patternMatch: z.boolean().optional(),
+    patternLogs: z.string().optional(),
+  })
+  .strict();
 
-export const CodebaseStructSchema = z.object({
-  options: CodebaseStructOptionsSchema,
-}).strict();
+export const CodebaseStructSchema = z
+  .object({
+    options: CodebaseStructOptionsSchema,
+  })
+  .strict();
 
 export type CodebaseStruct = z.infer<typeof CodebaseStructSchema>;
 
