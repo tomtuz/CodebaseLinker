@@ -1,18 +1,18 @@
-class FileReadError extends Error {
+export class FileReadError extends Error {
   constructor(message: string) {
     super(message);
     this.name = 'FileReadError';
   }
 }
 
-class FormattingError extends Error {
+export class FormattingError extends Error {
   constructor(message: string) {
     super(message);
     this.name = 'FormattingError';
   }
 }
 
-class OutputWriteError extends Error {
+export class OutputWriteError extends Error {
   constructor(message: string) {
     super(message);
     this.name = 'OutputWriteError';

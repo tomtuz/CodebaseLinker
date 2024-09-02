@@ -1,4 +1,4 @@
-import { CodebaseStruct, CodebaseStructOptions } from "@/types/codebaseStruct";
+import { CodebaseStruct } from "@/types/codebaseStruct";
 import { ProgramOptions } from "@/types/programOptions";
 
 // Purpose:

@@ -19,8 +19,8 @@
   "description": "A CLI tool to aggregate codebase files for context generation",
   "keywords": ["cli", "codebase", "context", "aggregator"],
   "scripts": {
-    "dev": "tsx src/index.ts -d -v -c .cotext/test.config.ts",
-    "bin": "tsx ./scripts/run_binary.ts",
+    "dev": "tsx src/index.ts -d -c .cotext/test.config.ts",
+    "bin": "tsx run_binary.ts",
     "build": "unbuild",
     "build-run": "unbuild && pnpm run dev",
     "start": "node ./dist/cli.mjs",

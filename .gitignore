@@ -4,3 +4,8 @@ dist
 # output file format, i.e. default: cr_codebase
 cotext_*
 docs/.self
+
+*.md
+*.exe
+
+.pm-indicator
