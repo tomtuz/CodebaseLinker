@@ -7,13 +7,13 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const pmIndicatorPath = path.resolve(__dirname, '..', '.pm-indicator')
-let packageManager = 'unknown'
+let packageManager = 'not-set'
 
 if (fs.existsSync(pmIndicatorPath)) {
   packageManager = fs.readFileSync(pmIndicatorPath, 'utf8').trim()
 }
 
-console.log(`Running with package manager: ${packageManager}`)
+console.log(`Package manager mode: ${packageManager}`)
 
 import('./index.mjs')
   .then((module) => {
