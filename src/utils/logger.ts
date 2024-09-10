@@ -1,4 +1,4 @@
-import picocolors from 'picocolors';
+import picocolors from "picocolors";
 
 export enum LogLevel {
   // native levels
@@ -12,37 +12,36 @@ export enum LogLevel {
 }
 
 export type OutputLevel = {
-  Info?: boolean,
-  Debug?: boolean,
-  Verbose?: boolean
-}
+  Info?: boolean;
+  Debug?: boolean;
+  Verbose?: boolean;
+};
 
 class Logger {
   private static instance: Logger;
   private level: OutputLevel = {
     Info: true,
     Debug: false,
-    Verbose: false
-  }
+    Verbose: false,
+  };
 
   private status_prefix = {
     success: {
-      emoji: '✅',
-      unicode: '✓',
-      ascii: '[OK]'
+      emoji: "✅",
+      unicode: "✓",
+      ascii: "[OK]",
     },
     error: {
-      emoji: '❌',
-      unicode: '✗',
-      ascii: '[X]'
+      emoji: "❌",
+      unicode: "✗",
+      ascii: "[X]",
     },
     info: {
-      emoji: 'i',
-      unicode: 'i',
-      ascii: '[i]'
+      emoji: "i",
+      unicode: "i",
+      ascii: "[i]",
     },
   };
-
 
   public static getInstance(): Logger {
     if (!Logger.instance) {
@@ -52,15 +51,15 @@ class Logger {
   }
 
   setLevels(levelObj: OutputLevel): void {
-    this.level.Info = levelObj.Info
-    this.level.Debug = levelObj.Debug
-    this.level.Verbose = levelObj.Verbose
+    this.level.Info = levelObj.Info;
+    this.level.Debug = levelObj.Debug;
+    this.level.Verbose = levelObj.Verbose;
 
-    logger.verbose("\nlog_level: ", this.level)
+    logger.verbose("\nlog_level: ", this.level);
   }
 
   getLevels(): OutputLevel {
-    return this.level
+    return this.level;
   }
 
   // native logs
@@ -99,36 +98,51 @@ class Logger {
 
   header(message?: any, ...optionalParams: any[]): void {
     const divider = "=".repeat(message.length);
-    const header_line = `\n${message}\n${divider}`
+    const header_line = `\n${message}\n${divider}`;
     console.log(header_line);
   }
 
   step(message?: any, ...optionalParams: any[]): void {
     const divider = "-".repeat(message.length);
-    const header_line = `\n${picocolors.blue(message)}\n${divider}`
+    const header_line = `\n${picocolors.blue(message)}\n${divider}`;
     console.log(header_line);
   }
 
-  struct(message: any, obj: any, optionalParams: any): void {
-    if (optionalParams.verbose === false) {
-      return
+  /**
+   * Logs a structured message with JSON-formatted object.
+   * @param message - Logged before the object
+   * @param obj - Used in JSON.stringify(obj, null, 2)
+   * @param optionalParams - Controls output (e.g., {verbose: false} to suppress)
+   */
+  struct(message: any, obj: any, optionalParams?: any): void {
+    if (optionalParams?.verbose === false) {
+      return;
     }
 
     console.log(
-      `${message}\n${JSON.stringify(obj, null, 2)}`
+      `${picocolors.yellow(message)}\n${JSON.stringify(obj, null, 2)}`,
     );
   }
 
-  status(message?: any, status_type?: "success" | "error" | "info" | "custom"): void {
+  status(
+    message?: any,
+    status_type?: "success" | "error" | "info" | "custom",
+  ): void {
     switch (status_type) {
       case "success":
-        console.log(`${picocolors.green(this.status_prefix.success.ascii)} ${message}`);
+        console.log(
+          `${picocolors.green(this.status_prefix.success.ascii)} ${message}`,
+        );
         break;
       case "error":
-        console.log(`${picocolors.red(this.status_prefix.error.ascii)} ${message}`);
+        console.log(
+          `${picocolors.red(this.status_prefix.error.ascii)} ${message}`,
+        );
         break;
       case "info":
-        console.log(`${picocolors.blue(this.status_prefix.info.ascii)} ${message}`);
+        console.log(
+          `${picocolors.blue(this.status_prefix.info.ascii)} ${message}`,
+        );
         break;
       case "custom":
         console.log(message);
@@ -140,4 +154,3 @@ class Logger {
 }
 
 export const logger = Logger.getInstance();
-

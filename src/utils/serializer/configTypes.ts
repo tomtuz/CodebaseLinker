@@ -1,15 +1,13 @@
-import { CLI_DEFAULTS, DEFAULT_CONFIG } from "@/defaults/defaultConfig";
-import { CodebaseStructOptions } from "@/types/codebaseStruct";
+import { CLI_DEFAULTS, UNIVERSAL_CONFIG } from "@/defaults/defaultConfig";
+import { CodebaseStruct } from "@/types/codebaseStruct";
 import { ProgramOptions } from "@/types/programOptions";
 import {
-  getStringOption,
-  getArrayOption,
-  getBooleanOption,
   setArrayOption,
   setBooleanOption,
   setStringOption,
 } from "./configOperations";
 import { logger } from "../logger";
+import { deepMerge, DeepPartial } from "../objectUtils";
 
 export enum BOOLEAN_OPTIONS {
   VERBOSE = 0,
@@ -130,7 +128,20 @@ export function createConfigIndex(): ConfigIndex {
   };
 }
 
-export function resolveCliOptions(
+export async function resolveCliOptions(
+  cliOptions: Partial<ProgramOptions>,
+): Promise<CodebaseStruct> {
+  const mergedConfig = deepMerge<CodebaseStruct>(
+    UNIVERSAL_CONFIG,
+    cliOptions as DeepPartial<CodebaseStruct>,
+  );
+
+  return mergedConfig;
+}
+
+// Vector representation which indicates changed options.
+// Not needed for CLI. Only the merging part is needed.
+export function resolveCliOptions2(
   cliOptions: Partial<ProgramOptions>,
 ): ConfigIndex {
   logger.setLevels({
@@ -146,6 +157,7 @@ export function resolveCliOptions(
     keyof ProgramOptions,
     any,
   ][]) {
+    // IF defined AND not DEFAULT CLI option
     if (value !== undefined && value !== CLI_DEFAULTS[key]) {
       const def = optionDefinitions[key];
       if (def) {

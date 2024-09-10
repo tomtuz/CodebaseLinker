@@ -3,20 +3,19 @@ import { resolveGlobalPatterns } from "./file_processing/globalPatternResolver";
 import { processFiles } from "./file_processing/fileProcessor";
 import path from "node:path";
 import { createLogWriter, LogWriter } from "./utils/logWriter";
-import { CodebaseStructOptions } from "@/types/codebaseStruct";
 import { loadConfiguration } from "./config/configLoader";
 import { DEFAULT_CONFIG } from "./defaults/defaultConfig";
 import { isDefaultConfig } from "./utils/configIndexManager";
+import { CodebaseStruct } from "@/types/codebaseStruct";
 
 // Cache for loaded configurations
-const configCache = new Map<string, CodebaseStructOptions>();
+const configCache = new Map<string, CodebaseStruct>();
 
 async function lazyLoadConfig(
-  config: CodebaseStructOptions,
+  config: CodebaseStruct,
   config_type: string,
-): Promise<CodebaseStructOptions> {
+): Promise<CodebaseStruct> {
   if (config_type === "app") {
-    // if (!isDefaultConfig({ cli: {}, app: config }) && config.config) {
     const cacheKey = config?.config || "";
 
     if (configCache.has(cacheKey)) {
@@ -32,16 +31,16 @@ async function lazyLoadConfig(
       throw new Error("Invalid or empty configuration loaded");
     }
 
-    configCache.set(cacheKey, loadedConfig.options);
-    return loadedConfig.options;
+    configCache.set(cacheKey, loadedConfig);
+    return loadedConfig;
   }
 
   logger.step("1. Using Default Configuration");
-  return DEFAULT_CONFIG.options;
+  return DEFAULT_CONFIG;
 }
 
 export async function processCodebase(
-  config: CodebaseStructOptions,
+  config: CodebaseStruct,
   config_type: string,
 ): Promise<void> {
   const errors: Error[] = [];
@@ -54,7 +53,7 @@ export async function processCodebase(
       Verbose: config.verbose,
     });
 
-    logger.header("Starting codebase processing");
+    logger.header(`Starting codebase processing - [${config_type}]`);
     logger.verbose("Config: ", config);
 
     // Lazy load configuration
