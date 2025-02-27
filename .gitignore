@@ -8,3 +8,5 @@ docs/.self
 *.exe
 .pm-indicator
 *.txt
+rust_house
+go_house
