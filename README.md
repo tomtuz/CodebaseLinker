@@ -1,9 +1,13 @@
-This package is meant to be usable without installation to avoid collisions with the codebase.
-It is excluded from git during initialization and placed in a `.cotext` folder.
+# Cotext 
 
-You can use this in:
+This package is meant to be usable without installation to avoid collisions with the codebase.
+
+Configuration (optional):
+- should be excluded from git within `.cotext` folder.
+
+Runtime modes:
 - CLI mode: easy, quick file aggregation
-- Application mode: repeated, custom behaviour with configuration file `cotext.config.ts`
+- Application mode: for repeated, custom behaviour with configuration file `.cotext/cotext.config.ts`
 
 ## Run
 ```sh
@@ -26,7 +30,7 @@ cotext init
 cotext -c <path-to-config>
 ```
 
-**Config example:**
+**Config (optional) example:**
 ```ts
 import { defineConfig } from './codebaseStruct';
 
@@ -59,5 +63,8 @@ export default defineConfig({
 });
 ```
 
-**Config result:**
+**Default output:**
 - codebase-context.md with aggregated files in one place
+
+Dev instructions:
+- [dev docs](./docs/dev.md)

@@ -1,36 +1,15 @@
-import { parseArgs } from "node:util";
 import { processCodebase } from "./processCodebase";
-import { translateConfigIndex } from "./utils/configIndexManager";
-import { CLI_DEFAULTS } from "./defaults/defaultConfig";
-import { ProgramOptions } from "./types/programOptions";
-import { resolveCliOptions } from "./utils/serializer/configTypes";
+import { customOptions, ProgramOptions } from "./types/programOptions";
+import { logger } from "./utils/logger";
+import { cliParser } from "./utils/cliParser";
+import { CodebaseStruct } from "./types/codebaseStruct";
 
-// Directly map configuration options to ProgramOptions
+// experimental custom parser
+// - faster than native one
+// - custom arg key names, i.e. <kebab-case> to <camelCase>
+// - parsed options are already merged with defaults
 const parseOptions = (): Partial<ProgramOptions> => {
-  const { values } = parseArgs({
-    options: {
-      config: { type: "string", short: "c", default: CLI_DEFAULTS.config },
-      include: {
-        type: "string",
-        multiple: true,
-        default: CLI_DEFAULTS.include,
-      },
-      exclude: {
-        type: "string",
-        multiple: true,
-        default: CLI_DEFAULTS.exclude,
-      },
-      input: { type: "string", short: "i", default: CLI_DEFAULTS.input },
-      output: { type: "string", short: "o", default: CLI_DEFAULTS.output },
-      format: { type: "string", short: "f", default: CLI_DEFAULTS.format },
-      verbose: { type: "boolean", short: "v", default: CLI_DEFAULTS.verbose },
-      debug: { type: "boolean", short: "d", default: CLI_DEFAULTS.debug },
-      "pattern-match": { type: "boolean", default: CLI_DEFAULTS.patternMatch },
-      logs: { type: "string", default: CLI_DEFAULTS.logs },
-      "pattern-logs": { type: "string", default: CLI_DEFAULTS.patternLogs },
-    },
-  });
-
+  const { values } = cliParser(customOptions);
   return values as Partial<ProgramOptions>;
 };
 
@@ -45,17 +24,30 @@ const main = async () => {
     // const resolvedConfig = resolveConfig(options);
     // 3. > I: ResolvedConfig, O: ConfigIndex
     // const configIndex = createConfigIndex(resolvedConfig);
+    logger.setLevels({
+      Info: true,
+      Debug: true,
+      Verbose: true,
+    });
 
-    const options = parseOptions();
+    const options = parseOptions() as CodebaseStruct;
 
-    // 1. > I: ProgamOptions, O: ConfigIndex
-    const configIndex = resolveCliOptions(options);
+    // CLI mode
+    if (!options?.config) {
+      // 1. We can run CLI with args from CLI directly
+      await processCodebase(options, "cli");
+    } else if (options?.config) {
+      // APP mode
+      logger.info("APP_MODE");
+      // // 1. > I: ProgamOptions, O: ConfigIndex
+      // const configIndex = resolveCliOptions(options);
 
-    // 2. > I: ConfigIndex, O: CodebaseStructOptions
-    const codebaseStructOptions = translateConfigIndex(configIndex);
+      // // 2. > I: ConfigIndex, O: CodebaseStructOptions
+      // const codebaseStructOptions = translateConfigIndex(configIndex);
 
-    const config_type = options.config ? "app" : "cli";
-    await processCodebase(codebaseStructOptions, config_type);
+      // const config_type = options.config ? "app" : "cli";
+      // await processCodebase(codebaseStructOptions, config_type);
+    }
 
     const endTime = process.hrtime.bigint();
     const executionTime = Number(endTime - startTime) / 1e9;

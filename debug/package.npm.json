@@ -13,33 +13,26 @@
       "default": "./dist/index.mjs"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "author": "tomtuz",
   "license": "ISC",
   "description": "A CLI tool to aggregate codebase files for context generation",
-  "keywords": [
-    "cli",
-    "codebase",
-    "context",
-    "aggregator"
-  ],
+  "keywords": ["cli", "codebase", "context", "aggregator"],
   "scripts": {
-    "dev": "tsx src/index.ts -d -c .cotext/test.config.ts",
-    "bin": "tsx run_binary.ts",
+    "dev": "tsx src/index.ts -d -v",
+    "dist": "node dist/index.mjs -d -v",
+    "dev:config": "tsx src/index.ts init",
     "build": "unbuild",
-    "build-run": "unbuild && npm run dev",
-    "start": "node ./dist/cli.mjs",
+    "build:run": "unbuild && npm run dev",
+    "bin:build": "go build -o bin/mybinary.exe main.go",
+    "bin:run": "tsx ./scripts/run_binary.ts",
     "prepare": "unbuild",
-    "prepublishOnly": "npm run build",
-    "pack": "npm pack --pack-gzip-level=9 --pack-destination='bin/prebuilt'",
-    "debug_build": "node dist/index.mjs -d -c .cotext/test.config.ts",
-    "debug_build_external": "npm node dist/index.mjs -d -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
-    "debug_tsx": "tsx src/index.ts -d -c .cotext/test.config.ts",
-    "debug_tsx_external": "tsx src/index.ts -d -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
-    "build_bin": "go build -o bin/mybinary.exe main.go",
-    "dev:init": "tsx src/index.ts init",
+    "prepublishOnly": "unbuild",
+    "pack": "npm pack --pack-destination='bin/prebuilt'",
+    "debug:dist": "npm run dist -- -c .cotext/test.config.ts",
+    "debug:dist:external": "npm run dist -- -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
+    "debug:dev": "npm run dev -- -c .cotext/test.config.ts",
+    "debug:dev:external": "npm run dev -- -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run"

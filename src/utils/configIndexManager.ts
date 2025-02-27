@@ -1,6 +1,6 @@
 import { ProgramOptions } from "@/types/programOptions";
 import { CLI_DEFAULTS, DEFAULT_CONFIG } from "@/defaults/defaultConfig";
-import { CodebaseStructOptions } from "@/types/codebaseStruct";
+import { CodebaseStruct } from "@/types/codebaseStruct";
 import {
   ConfigIndex,
   STRING_OPTIONS,
@@ -13,47 +13,50 @@ import {
   getArrayOption,
   getBooleanOption,
 } from "./serializer/configOperations";
+import { CodebaseStructOptions } from "@/defaults/build/codebaseStruct";
 
 export type ResolvedConfig = {
   cli: Partial<ProgramOptions>;
   app: CodebaseStructOptions;
 };
 
-export function translateConfigIndex(
-  configIndex: ConfigIndex,
-): CodebaseStructOptions {
+export function translateConfigIndex(configIndex: ConfigIndex): CodebaseStruct {
   return {
     config:
       getStringOption(configIndex, STRING_OPTIONS.CONFIG) ??
-      DEFAULT_CONFIG.options.config,
+      DEFAULT_CONFIG.config,
     name:
-      getStringOption(configIndex, STRING_OPTIONS.NAME) ??
-      DEFAULT_CONFIG.options.name,
+      getStringOption(configIndex, STRING_OPTIONS.NAME) ?? DEFAULT_CONFIG.name,
     patterns:
       getArrayOption(configIndex, ARRAY_OPTIONS.PATTERNS) ??
-      DEFAULT_CONFIG.options.patterns,
+      DEFAULT_CONFIG.patterns,
     baseUrl:
       getStringOption(configIndex, STRING_OPTIONS.BASE_URL) ??
-      DEFAULT_CONFIG.options.baseUrl,
+      DEFAULT_CONFIG.baseUrl,
     output:
       getStringOption(configIndex, STRING_OPTIONS.OUTPUT) ??
-      DEFAULT_CONFIG.options.output,
+      DEFAULT_CONFIG.output,
     format:
       getStringOption(configIndex, STRING_OPTIONS.FORMAT) ??
-      DEFAULT_CONFIG.options.format,
+      DEFAULT_CONFIG.format,
     selectionMode:
       getStringOption(configIndex, STRING_OPTIONS.SELECTION_MODE) ??
-      (DEFAULT_CONFIG.options
-        .selectionMode as CodebaseStructOptions["selectionMode"]),
+      (DEFAULT_CONFIG.selectionMode as CodebaseStructOptions["selectionMode"]),
     verbose:
       getBooleanOption(configIndex, BOOLEAN_OPTIONS.VERBOSE) ??
-      DEFAULT_CONFIG.options.verbose,
+      DEFAULT_CONFIG.verbose,
     debug:
       getBooleanOption(configIndex, BOOLEAN_OPTIONS.DEBUG) ??
-      DEFAULT_CONFIG.options.debug,
+      DEFAULT_CONFIG.debug,
     patternMatch:
       getBooleanOption(configIndex, BOOLEAN_OPTIONS.PATTERN_MATCH) ??
-      DEFAULT_CONFIG.options.patternMatch,
+      DEFAULT_CONFIG.patternMatch,
+    input:
+      getStringOption(configIndex, STRING_OPTIONS.FORMAT) ??
+      DEFAULT_CONFIG.input,
+    logs:
+      getStringOption(configIndex, STRING_OPTIONS.FORMAT) ??
+      DEFAULT_CONFIG.logs,
   };
 }
 
