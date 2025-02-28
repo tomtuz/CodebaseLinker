@@ -1,4 +1,4 @@
-import { logger } from "@/utils/logger";
+import { Logger } from "@/utils/logger";
 import { resolveGlobalPatterns } from "./file_processing/globalPatternResolver";
 import { processFiles } from "./file_processing/fileProcessor";
 import path from "node:path";
@@ -10,6 +10,11 @@ import { CodebaseStruct } from "@/types/codebaseStruct";
 
 // Cache for loaded configurations
 const configCache = new Map<string, CodebaseStruct>();
+const logger = new Logger("processCodebase", {
+  Info: true,
+  Debug: false,
+  Verbose: false
+});
 
 async function lazyLoadConfig(
   config: CodebaseStruct,
@@ -47,11 +52,6 @@ export async function processCodebase(
 
   try {
     // Set log level based on options
-    logger.setLevels({
-      Info: true,
-      Debug: config.debug,
-      Verbose: config.verbose,
-    });
 
     logger.header(`Starting codebase processing - [${config_type}]`);
     logger.verbose("Config: ", config);

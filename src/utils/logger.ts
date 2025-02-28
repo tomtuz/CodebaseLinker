@@ -17,7 +17,7 @@ export type OutputLevel = {
   Verbose?: boolean;
 };
 
-class Logger {
+export class Logger {
   private static instance: Logger;
   private level: OutputLevel = {
     Info: true,
@@ -43,9 +43,16 @@ class Logger {
     },
   };
 
+  constructor(name: string, levels?: OutputLevel) {
+    if (levels) {
+      console.log(`[logger:${name}]`, levels);
+      this.setLevels(levels);
+    }
+  }
+
   public static getInstance(): Logger {
     if (!Logger.instance) {
-      Logger.instance = new Logger();
+      Logger.instance = new Logger('-');
     }
     return Logger.instance;
   }
@@ -55,7 +62,7 @@ class Logger {
     this.level.Debug = levelObj.Debug;
     this.level.Verbose = levelObj.Verbose;
 
-    logger.verbose("\nlog_level: ", this.level);
+    logger.verbose("\n#logger# log_level: ", this.level);
   }
 
   getLevels(): OutputLevel {
@@ -84,7 +91,7 @@ class Logger {
 
   debug(message?: any, ...optionalParams: any[]): void {
     if (this.level?.Debug || this.level?.Verbose) {
-      console.warn(message, ...optionalParams);
+      console.log(message, ...optionalParams);
     }
   }
 

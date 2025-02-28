@@ -5,6 +5,14 @@ import {
   ParseResult,
 } from "@/types/programOptions";
 
+import { Logger } from "./logger";
+
+const logger = new Logger("cliParser", {
+  Info: false,
+  Debug: false,
+  Verbose: false
+});
+
 // ASCII code for '-' character
 const DASH_CHAR_CODE = 45;
 
@@ -26,7 +34,7 @@ export function cliParser(
   const args = process.argv.slice(2);
 
   // Object to store parsed values
-  const values: { [key: string]: any } = Object.create(null);
+  const values: { [key: string]: any } = {};
   // Array to store positional arguments
   const positionals: string[] = [];
   // Map to store short option aliases for quick lookup
@@ -38,7 +46,9 @@ export function cliParser(
 
   // Set up short options
   for (const key in options) {
+    logger.verbose(`[key]: ${key}`);
     const opt = options[key];
+    logger.verbose("  [opt]: ", opt);
     // Add short option alias to the map if it exists
     if (opt.short) {
       if (shortOptions.has(opt.short)) {
@@ -47,6 +57,12 @@ export function cliParser(
       shortOptions.set(opt.short, key);
     }
   }
+
+  logger.verbose('[values]: ', values);
+  logger.verbose('[positionals]: ', positionals);
+  logger.verbose('[shortOptions]: ', shortOptions);
+  logger.verbose('[seenOptions]: ', seenOptions);
+  logger.verbose('[cliSetOptions]: ', cliSetOptions);
 
   // Cache args length for performance in the loop
   const argsLength = args.length;

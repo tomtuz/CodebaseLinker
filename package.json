@@ -16,9 +16,6 @@
   "files": [
     "dist"
   ],
-  "files": [
-    "dist"
-  ],
   "author": "tomtuz",
   "license": "ISC",
   "description": "A CLI tool to aggregate codebase files for context generation",
@@ -28,16 +25,10 @@
     "context",
     "aggregator"
   ],
-  "keywords": [
-    "cli",
-    "codebase",
-    "context",
-    "aggregator"
-  ],
   "scripts": {
-    "dev": "tsx src/index.ts -d -v",
+    "dev": "dotenvx run -- tsx src/index.ts -d -v",
     "dist": "node dist/index.mjs -d -v",
-    "dev:config": "tsx src/index.ts init",
+    "dev:config": "dotenvx run -- tsx src/index.ts init",
     "build": "unbuild",
     "build:run": "unbuild && pnpm run dev",
     "bin:build": "go build -o bin/mybinary.exe main.go",
@@ -46,17 +37,20 @@
     "prepublishOnly": "unbuild",
     "pack": "pnpm pack --pack-gzip-level=9 --pack-destination='bin/prebuilt'",
     "debug:dist": "pnpm run dist -- -c .cotext/test.config.ts",
-    "debug:dist:external": "pnpm run dist -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
-    "debug:dev": "pnpm run dev -- -c cotext/test.config.ts",
-    "debug:dev:external": "pnpm run dev -- -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
+    "debug:dist:external": "dotenvx run -- pnpm run dist -c $DEV_BUILD_DIR",
+    "debug:dev": "dotenvx run -- tsx src/index.ts -d -v -c cotext/test.config.ts",
+    "debug:dev:cotext": "dotenvx run -- tsx src/index.ts -d -v -c cotext/cotext.config.ts",
+    "debug:dev2": "dotenvx run -- tsx src/index.ts -d -v",
+    "debug:dev:external": "dotenvx run -- pnpm run dev -- -c $DEV_BUILD_DIR",
     "debug_build": "node dist/index.mjs -d -c .cotext/test.config.ts",
-    "debug_build_external": "pnpm node dist/index.mjs -d -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
-    "debug_tsx": "tsx src/index.ts -d -c .cotext/test.config.ts",
-    "debug_tsx_external": "tsx src/index.ts -d -c E:/Tomo/ccm/tool_ai_agent_go/.cotext/cotext.config.ts",
+    "debug_build_external": "dotenvx run -- pnpm node dist/index.mjs -d -c $DEV_BUILD_DIR",
+    "debug_tsx": "dotenvx run -- tsx src/index.ts -d -c .cotext/test.config.ts",
+    "debug_dev": "dotenvx run -- tsx src/index.ts -d -v",
+    "debug_tsx_external": "dotenvx run -- tsx src/index.ts -d -c $DEV_BUILD_DIR",
     "build_bin": "go build -o bin/mybinary.exe main.go",
     "build_go": "go build -o bin/mybinary.exe main.go",
     "run_go": "go run ./src/go_house/main.go -path .",
-    "dev:init": "tsx src/index.ts init",
+    "dev:init": "dotenvx run -- tsx src/index.ts init",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
@@ -71,6 +65,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.38.3",
     "@types/glob": "^8.1.0",
     "@types/node": "^22.13.5",
     "@vitest/ui": "^3.0.7",

@@ -1,9 +1,19 @@
 import { processCodebase } from "./processCodebase";
 import { customOptions, ProgramOptions } from "./types/programOptions";
-import { logger } from "./utils/logger";
+import { Logger } from "./utils/logger";
 import { cliParser } from "./utils/cliParser";
 import { CodebaseStruct } from "./types/codebaseStruct";
 
+if (process.env.MODE_DEV) {
+  console.log("\nENV values:");
+  console.log(` - DEV_BUILD_DIR: ${process.env.DEV_BUILD_DIR}`);
+  console.log(` - EXTERNAL_DIR: ${process.env.EXTERNAL_DIR}`);
+  console.log(` - TEST_BUILD_DIR: ${process.env.TEST_BUILD_DIR}`);
+  console.log(` - MODE_DEV: ${process.env.MODE_DEV}`);
+  console.log(` - MODE_PROD: ${process.env.MODE_PROD}`);
+}
+
+// experimental custom parser
 // experimental custom parser
 // - faster than native one
 // - custom arg key names, i.e. <kebab-case> to <camelCase>
@@ -12,6 +22,13 @@ const parseOptions = (): Partial<ProgramOptions> => {
   const { values } = cliParser(customOptions);
   return values as Partial<ProgramOptions>;
 };
+
+// const logger = new Logger("index");
+const logger = new Logger("index", {
+  Info: true,
+  Debug: false,
+  Verbose: false
+});
 
 const main = async () => {
   try {
@@ -24,13 +41,8 @@ const main = async () => {
     // const resolvedConfig = resolveConfig(options);
     // 3. > I: ResolvedConfig, O: ConfigIndex
     // const configIndex = createConfigIndex(resolvedConfig);
-    logger.setLevels({
-      Info: true,
-      Debug: true,
-      Verbose: true,
-    });
-
     const options = parseOptions() as CodebaseStruct;
+    logger.verbose("\nParsed options: ", options);
 
     // CLI mode
     if (!options?.config) {
@@ -38,7 +50,7 @@ const main = async () => {
       await processCodebase(options, "cli");
     } else if (options?.config) {
       // APP mode
-      logger.info("APP_MODE");
+      logger.info("APP_MODE (OFF)");
       // // 1. > I: ProgamOptions, O: ConfigIndex
       // const configIndex = resolveCliOptions(options);
 

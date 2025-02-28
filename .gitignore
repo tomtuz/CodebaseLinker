@@ -10,3 +10,4 @@ cotext_*
 *.txt
 rust_house
 go_house
+.env*

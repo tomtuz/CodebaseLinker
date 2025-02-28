@@ -56,7 +56,7 @@ class Logger {
     this.level.Debug = levelObj.Debug
     this.level.Verbose = levelObj.Verbose
 
-    this.verbose("\nlog_level: ", this.level)
+    logger.verbose("\n[logging_syntax] log_level: ", this.level);
   }
 
   getLevels(): OutputLevel {

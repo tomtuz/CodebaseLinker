@@ -16,6 +16,18 @@
     {
       "type": "node-terminal",
       "request": "launch",
+      "name": "Debug:DEV2 (no config)",
+      "command": "pnpm run debug:dev2"
+    },
+    {
+      "type": "node-terminal",
+      "request": "launch",
+      "name": "Debug:DEV:COTEXT)",
+      "command": "pnpm run debug:dev:cotext"
+    },
+    {
+      "type": "node-terminal",
+      "request": "launch",
       "name": "Debug Build External",
       "command": "npm run build && npm run debug:dist:external"
     },
