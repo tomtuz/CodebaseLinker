@@ -1,0 +1,1664 @@
+File: gello.logs
+  Pattern: README.md
+  Matched: false
+
+File: gello.logs
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: gello.logs
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: gello.logs
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: gello.logs
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: gello.logs
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: gello.logs
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: gello.logs
+  Pattern: biome.jsonc
+  Matched: false
+
+File: gello.logs
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: gello.logs
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: gello.logs
+  Pattern: codebase*.md
+  Matched: false
+
+File: gello.logs
+  Pattern: *.go
+  Matched: false
+
+File: gello.logs
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: package.json
+  Pattern: README.md
+  Matched: false
+
+File: package.json
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: package.json
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: package.json
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: package.json
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: package.json
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: package.json
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: package.json
+  Pattern: biome.jsonc
+  Matched: false
+
+File: package.json
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: package.json
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: package.json
+  Pattern: codebase*.md
+  Matched: false
+
+File: package.json
+  Pattern: *.go
+  Matched: false
+
+File: package.json
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: run_binary.ts
+  Pattern: README.md
+  Matched: false
+
+File: run_binary.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: run_binary.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: run_binary.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: run_binary.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: run_binary.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: run_binary.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: run_binary.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: run_binary.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: run_binary.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: run_binary.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: run_binary.ts
+  Pattern: *.go
+  Matched: false
+
+File: run_binary.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: tsconfig.json
+  Pattern: README.md
+  Matched: false
+
+File: tsconfig.json
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: tsconfig.json
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: tsconfig.json
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: tsconfig.json
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: tsconfig.json
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: tsconfig.json
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: tsconfig.json
+  Pattern: biome.jsonc
+  Matched: false
+
+File: tsconfig.json
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: tsconfig.json
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: tsconfig.json
+  Pattern: codebase*.md
+  Matched: false
+
+File: tsconfig.json
+  Pattern: *.go
+  Matched: false
+
+File: tsconfig.json
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: README.md
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: biome.jsonc
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: codebase*.md
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: *.go
+  Matched: false
+
+File: WORKFLOW.md
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\index.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\index.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\index.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\index.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\index.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\index.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\index.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\index.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\index.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\index.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\index.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\index.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\index.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\processCodebase.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\config\configLoader.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\config\loaderUtils.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\config\schema.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\config\validate.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\defaults\codebaseStruct.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: README.md
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: *.go
+  Matched: false
+
+File: src\defaults\cotext.config.js
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\defaults\cotext.config.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\defaults\defaultConfig.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\defaults\example.config.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\errors\ConfigurationErrors.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\errors\FileProcessorErrors.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\errors\GlobErrors.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\file_processing\fileProcessor.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\file_processing\globalPatternResolver.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\file_processing\patternProcessor.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\init\projectInitializer.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: README.md
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: *.go
+  Matched: false
+
+File: src\scripts\postbuild.mjs
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\types\codebaseStruct.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\types\programOptions.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\utils\defaultPatterns.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\utils\logger.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\utils\logWriter.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\utils\objectUtils.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\utils\old_logger.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: README.md
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: .gitignore{,/**/*}
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: .aidigestignore{,/**/*}
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: example{,/**/*}
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: .cotext{,/**/*}
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: vitest.config.ts
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: tsup.config.ts
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: biome.jsonc
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: docs{,/**/*}
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: .vscode{,/**/*}
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: codebase*.md
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: *.go
+  Matched: false
+
+File: src\utils\pathResolver.ts
+  Pattern: tests{,/**/*}
+  Matched: false
+
